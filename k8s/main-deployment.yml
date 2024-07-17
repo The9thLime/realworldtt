@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: realworldtt-deployment 
+  labels:
+    app: realworldtt
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: realworldtt 
+  template:
+    metadata:
+      labels:
+        app: realworldtt 
+    spec:
+      containers:
+        - name: realworldtt 
+          image: the9thlime/realworldtt:latest
+          ports:
+            - containerPort: 8000
