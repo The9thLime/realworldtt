@@ -10,7 +10,7 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends gcc curl
+    && apt-get install -y --no-install-recommends gcc
 
 # Install Python dependencies
 COPY requirements.txt /app/
@@ -29,6 +29,9 @@ ENV PYTHONUNBUFFERED=1
 # Set the working directory in the container
 WORKDIR /app
 
+# Install curl
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends curl
 # Copy the virtual environment from the builder stage
 COPY --from=builder /app/venv /app/venv
 
