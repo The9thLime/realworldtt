@@ -9,4 +9,5 @@ spec:
     - protocol: TCP
       port: 8001
       targetPort: 8001
+      nodePort: 32666
   type: NodePort
