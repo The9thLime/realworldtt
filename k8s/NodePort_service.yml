@@ -7,7 +7,7 @@ spec:
     app: realworldtt 
   ports:
     - protocol: TCP
-      port: 8001
-      targetPort: 8001
-      nodePort: 32666
+      port: 80
+      targetPort: 8010
+      nodePort: 30000
   type: NodePort
