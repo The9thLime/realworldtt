@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: realworldtt 
-          image: the9thlime/realworldtt:v5
+          image: the9thlime/realworldtt:v7
           ports:
-            - containerPort: 8000
+            - containerPort: 8010
