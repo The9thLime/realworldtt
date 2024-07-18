@@ -38,4 +38,6 @@ COPY --from=builder /app/venv /app/venv
 # Copy the Django project into the container
 COPY . /app/
 
-CMD ["sh", "-c", "/app/venv/bin/python manage.py migrate && /app/venv/bin/python manage.py runserver 0.0.0.0"]
+EXPOSE 8000
+
+CMD ["sh", "-c", "/app/venv/bin/python manage.py migrate && /app/venv/bin/python manage.py runserver 0.0.0.0:8000"]
