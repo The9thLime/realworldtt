@@ -27,4 +27,4 @@ kind: Namespace
 metadata:
   name: devops-tools
   labels:
-    devops-tools
+    name: devops-tools
