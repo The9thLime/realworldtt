@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/the9thlime/realworldtt.gtt'
+                git 'https://github.com/the9thlime/realworldtt.git'
             }
         }
 
