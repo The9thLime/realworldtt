@@ -36,7 +36,7 @@ RUN apt-get update \
 COPY --from=builder /app/venv /app/venv
 
 # Copy the Django project into the container
-COPY . /app/
+COPY ./django/. /app/
 
 EXPOSE 8010
 
