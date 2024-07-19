@@ -10,7 +10,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/the9thlime/realworldtt.git'
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/The9thLime/realworldtt.git']]])
+            }
             }
         }
 
