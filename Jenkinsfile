@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_CREDENTIALS_ID = 'dockerhub-credentials-id' // Replace with your Docker Hub credentials ID
+        DOCKER_CREDENTIALS_ID = 'dockerhub_id' // Replace with your Docker Hub credentials ID
         IMAGE_NAME = 'realworldtt'
         IMAGE_TAG = 'latest'
     }
@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-repo/your-django-app.git'
+                git 'https://github.com/the9thlime/realworldtt.gtt'
             }
         }
 
@@ -57,7 +57,7 @@ pipeline {
             steps {
                 // Deploy Docker image to Minikube Kubernetes cluster
                 script {
-                    sh 'kubectl apply -f k8s/deployment.yaml'
+                    sh 'kubectl apply -f k8s/main-deployment.yaml'
                     sh 'kubectl apply -f k8s/service.yaml'
                 }
             }
