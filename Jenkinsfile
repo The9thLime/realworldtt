@@ -12,7 +12,6 @@ pipeline {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/The9thLime/realworldtt.git']]])
             }
-            }
         }
 
         stage('Setup Environment') {
