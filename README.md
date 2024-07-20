@@ -12,7 +12,7 @@ Tech Stack:
 To install and run locally:
 
 ```bash
-git clone https://github.com/danjac/realworld/ && cd realworld
+git clone https://github.com/the9thlime/realworldtt/ && cd django/realworld
 
 python -m venv venv
 
