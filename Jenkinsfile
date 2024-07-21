@@ -19,10 +19,13 @@ pipeline {
     }
   }
   stages {
-    stage('Run python') {
+    stage('Run test') {
       steps {
         container('python') {
-          sh 'pip install -r requirements.txt'
+          sh ''' 
+                cd django/
+                python manage.py test
+            '''
         }
       }
     }
