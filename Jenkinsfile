@@ -9,13 +9,8 @@ pipeline {
             some-label: some-label-value
         spec:
           containers:
-          - name: maven
-            image: maven:alpine
-            command:
-            - cat
-            tty: true
-          - name: busybox
-            image: busybox
+          - name: python
+            image: python:slim
             command:
             - cat
             tty: true
@@ -28,9 +23,6 @@ pipeline {
       steps {
         container('maven') {
           sh 'mvn -version'
-        }
-        container('busybox') {
-          sh '/bin/busybox'
         }
       }
     }
