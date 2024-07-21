@@ -14,6 +14,11 @@ pipeline {
             command:
             - cat
             tty: true
+          - name: kubectl
+            image: bitnami/kubectl:latest
+            command:
+            - cat
+            tty: true
           - name: docker
             image: docker:latest
             command:
@@ -58,11 +63,13 @@ pipeline {
     }
      stage('Update Kubernetes Manifest') {
             steps {
-                script {
-                    sh """
-                    kubectl set image deployment/realworldtt-deployment=the9thlime/realworldtt:0.0.${BUILD_NUMBER} 
-                    kubectl rollout status deployment/realworldtt-deployment
-                    """
+                container('kubectl') {
+                    script {
+                        sh """
+                            kubectl set image deployment/realworldtt-deployment=the9thlime/realworldtt:0.0.${BUILD_NUMBER} 
+                            kubectl rollout status deployment/realworldtt-deployment
+                        """
+                    }
                 }
             }
         }
