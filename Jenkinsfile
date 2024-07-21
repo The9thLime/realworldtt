@@ -56,5 +56,15 @@ pipeline {
             }
         }
     }
+     stage('Update Kubernetes Manifest') {
+            steps {
+                script {
+                    sh """
+                    kubectl set image deployment/realworldtt-deployment=the9thlime/realworldtt:0.0.${BUILD_NUMBER} 
+                    kubectl rollout status deployment/realworldtt-deployment
+                    """
+                }
+            }
+        }
   }
 }
