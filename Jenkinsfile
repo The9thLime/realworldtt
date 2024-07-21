@@ -67,7 +67,7 @@ pipeline {
                     script {
                         sh """
                             kubectl get pods -n default
-                            kubectl set image deployment/realworldtt-deployment realworldtt=the9thlime/realworldtt:${BUILD_NUMBER} -n default
+                            kubectl set image deployment/realworldtt-deployment realworldtt=the9thlime/realworldtt:0.0.${BUILD_NUMBER} -n default
                             kubectl rollout status deployment/realworldtt-deployment -n default
                         """
                     }
