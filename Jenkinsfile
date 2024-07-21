@@ -35,9 +35,6 @@ pipeline {
       retries 2
     }
   }
-  environment {
-    KUBECONFIG = '/var/run/secrets/kubernetes.io/serviceaccount/token'
-  }
   stages {
     // stage('Run test') {
     //   steps {
