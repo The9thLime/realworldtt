@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent kube-agent
 
     environment {
         DOCKER_CREDENTIALS_ID = 'dockerhub_id' // Replace with your Docker Hub credentials ID
