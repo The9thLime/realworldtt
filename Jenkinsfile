@@ -12,8 +12,6 @@ pipeline {
               containers:
               - name: python
                 image: python:alpine
-                command:
-                - cat
             """
         }
     }
