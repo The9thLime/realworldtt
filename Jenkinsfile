@@ -10,9 +10,10 @@ pipeline {
                 some-label: kubeagent
             spec:
               containers:
-              - name: jnlp
-                image: jenkins/inbound-agent:latest
-                args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+              - name: python
+                image: python:alpine
+                command:
+                - cat
             """
         }
     }
@@ -24,15 +25,10 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/The9thLime/realworldtt.git']]])
-            }
-        }
 
         stage('Setup Environment') {
             steps {
-                script {
+                container(python) {
                     sh 'python3 -m venv venv'
                     sh '. venv/bin/activate'
                     sh 'pip install -r requirements.txt'
@@ -40,44 +36,7 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                script {
-                    sh '. venv/bin/activate'
-                    sh 'pytest'
-                }
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                // Build Docker image for your Django app
-                script {
-                    sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
-                }
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                // Push Docker image to Docker Hub
-                script {
-                    withDockerRegistry([credentialsId: "${DOCKER_CREDENTIALS_ID}", url: 'https://index.docker.io/v1/']) {
-                        sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG}'
-                    }
-                }
-            }
-        }
-
-        stage('Deploy to Kubernetes') {
-            steps {
-                // Deploy Docker image to Minikube Kubernetes cluster
-                script {
-                    sh 'kubectl apply -f k8s/main-deployment.yaml'
-                    sh 'kubectl apply -f k8s/service.yaml'
-                }
-            }
-        }
+        
     }
 
     post {
