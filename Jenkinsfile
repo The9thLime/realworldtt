@@ -36,39 +36,39 @@ pipeline {
     }
   }
   stages {
-    // stage('Run test') {
-    //   steps {
-    //     container('python') {
-    //       sh ''' 
-    //             cd django/
-    //             pip install -r ../requirements.txt
-    //             python manage.py test
-    //         '''
-    //     }
-    //   }
-    // }
-    // stage('Build docker image') {
-    //     steps {
-    //         container('docker') {
-    //             sh '''
-    //                 docker build -t the9thlime/realworldtt:0.0.${BUILD_NUMBER} .
-    //             '''
-    //             script {
-    //                 withDockerRegistry([credentialsId: "dockerhub", url: 'https://index.docker.io/v1/']) {
-    //                     sh 'docker push the9thlime/realworldtt:0.0.${BUILD_NUMBER}'
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    stage('Run test') {
+      steps {
+        container('python') {
+          sh ''' 
+                cd django/
+                pip install -r ../requirements.txt
+                python manage.py test
+            '''
+        }
+      }
+    }
+    stage('Build docker image') {
+        steps {
+            container('docker') {
+                sh '''
+                    docker build -t the9thlime/realworldtt:0.0.${BUILD_NUMBER} .
+                '''
+                script {
+                    withDockerRegistry([credentialsId: "dockerhub", url: 'https://index.docker.io/v1/']) {
+                        sh 'docker push the9thlime/realworldtt:0.0.${BUILD_NUMBER}'
+                    }
+                }
+            }
+        }
+    }
      stage('Update Kubernetes Manifest') {
             steps {
                 container('kubectl') {
                     script {
                         sh """
-                            kubectl get pods
-                            kubectl set image deployment/realworldtt-deployment=the9thlime/realworldtt:0.0.7
-                            kubectl rollout status deployment/realworldtt-deployment
+                            kubectl get pods -n default
+                            kubectl set image deployment/realworldtt-deployment=the9thlime/realworldtt:${BUILD_NUMBER} -n default
+                            kubectl rollout status deployment/realworldtt-deployment -n default
                         """
                     }
                 }
