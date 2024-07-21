@@ -24,6 +24,7 @@ pipeline {
         container('python') {
           sh ''' 
                 cd django/
+                pip install -r ../requirements.txt
                 python manage.py test
             '''
         }
