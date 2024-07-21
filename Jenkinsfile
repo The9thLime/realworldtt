@@ -1,6 +1,20 @@
 pipeline {
     agent {
-      label "kubeagent"
+        kubernetes {
+            label 'kubeagent'
+            yaml """
+            apiVersion: v1
+            kind: Pod
+            metadata:
+              labels:
+                some-label: kubeagent
+            spec:
+              containers:
+              - name: jnlp
+                image: jenkins/inbound-agent:latest
+                args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+            """
+        }
     }
 
     environment {
