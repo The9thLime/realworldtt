@@ -19,10 +19,10 @@ pipeline {
     }
   }
   stages {
-    stage('Run maven') {
+    stage('Run python') {
       steps {
-        container('maven') {
-          sh 'mvn -version'
+        container('python') {
+          sh 'pip install -r requirements.txt'
         }
       }
     }
