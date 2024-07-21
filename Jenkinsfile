@@ -38,11 +38,4 @@ pipeline {
 
         
     }
-
-    post {
-        always {
-            // Clean up workspace or perform other post-build actions
-            cleanWs()
-        }
-    }
 }
