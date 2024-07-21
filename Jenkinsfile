@@ -69,6 +69,7 @@ pipeline {
                 container('kubectl') {
                     script {
                         sh """
+                            kubectl get pods
                             kubectl set image deployment/realworldtt-deployment=the9thlime/realworldtt:0.0.7
                             kubectl rollout status deployment/realworldtt-deployment
                         """
