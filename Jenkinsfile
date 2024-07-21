@@ -15,7 +15,7 @@ pipeline {
             - cat
             tty: true
           - name: kubectl
-            image: bitnami/kubectl:latest
+            image: alpine/k8s:1.30.3
             command:
             - cat
             tty: true
