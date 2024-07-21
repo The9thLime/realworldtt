@@ -12,6 +12,10 @@ pipeline {
               containers:
               - name: python
                 image: python:alpine
+                command:
+                - sleep
+                args:
+                - 99d
             """
         }
     }
