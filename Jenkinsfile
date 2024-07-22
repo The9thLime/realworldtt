@@ -61,7 +61,6 @@ pipeline {
             }
         }
     }
-    }
      stage('Update Kubernetes Manifest') {
             steps {
                 container('kubectl') {
