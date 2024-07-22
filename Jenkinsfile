@@ -54,12 +54,13 @@ pipeline {
                     docker build -t the9thlime/realworldtt:0.0.${BUILD_NUMBER} .
                 '''
                 script {
-                    withDockerRegistry([credentialsId: "dockerhub", url: 'https://index.docker.io/v1/']) {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
                         sh 'docker push the9thlime/realworldtt:0.0.${BUILD_NUMBER}'
                     }
                 }
             }
         }
+    }
     }
      stage('Update Kubernetes Manifest') {
             steps {
