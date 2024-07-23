@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: realworldtt-deployment
-  namespace: devops-tools  # Ensure this matches the namespace in the Secret
+  namespace: default
   labels:
     app: realworldtt
 spec:
