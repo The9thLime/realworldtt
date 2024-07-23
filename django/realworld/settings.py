@@ -19,16 +19,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env_path = Path(__file__).resolve().parent.parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
-SECRET_KEY = os.getenv('SECRET_KEY', 'defaultsecretkey')
-DEBUG = os.getenv('DEBUG', 'False') == 'True'  # Convert to boolean
-DATABASE_NAME = os.getenv('DATABASE_NAME')
-DATABASE_USER = os.getenv('DATABASE_USER')
-DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
-DATABASE_HOST = os.getenv('DATABASE_HOST')
-DATABASE_PORT = int(os.getenv('DATABASE_PORT', '3306'))
 
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
+# Secret key should not be present in the configuration or the repository
+SECRET_KEY=os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
