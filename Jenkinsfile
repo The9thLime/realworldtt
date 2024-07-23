@@ -35,16 +35,16 @@ pipeline {
       retries 2
     }
   }
-  stages {
+   stages {
     stage('Run test') {
       steps {
         container('python') {
           withEnv([
-            'SECRET_KEY=default-secret-key',
-            'DATABASE_NAME=test_db_name',
-            'DATABASE_USER=test_db_user',
-            'DATABASE_PASSWORD=test_db_password',
-            'DATABASE_HOST=localhost',
+            'SECRET_KEY=django-insecure-f35(x7w#1hz7%oejc(t(x8ii7n^%n0pvzsp@x*qtfh8^$3^3j+',
+            'DATABASE_NAME=realworld',
+            'DATABASE_USER=realworld',
+            'DATABASE_PASSWORD=123',
+            'DATABASE_HOST=127.0.0.1',
             'DATABASE_PORT=3306'
           ]) {
             sh '''
