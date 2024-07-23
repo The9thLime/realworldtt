@@ -15,7 +15,14 @@ RUN apt-get update \
        libpq-dev \
        libmariadb-dev-compat \
        libmariadb-dev \
+       python3-dev \
     && apt-get clean
+
+# Verify installation of pkg-config and libraries
+RUN pkg-config --version \
+    && pkg-config --exists mysqlclient || echo "mysqlclient not found by pkg-config" \
+    && pkg-config --exists mariadb || echo "mariadb not found by pkg-config" \
+    && pkg-config --exists libmariadb || echo "libmariadb not found by pkg-config"
 
 # Install Python dependencies
 COPY requirements.txt .
@@ -48,5 +55,4 @@ COPY ./django/. /app/
 # Expose the necessary port
 EXPOSE 8010
 
-# Run the Django application
-CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8010"]
+# Run the
