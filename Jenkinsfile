@@ -40,6 +40,7 @@ pipeline {
       steps {
         container('python') {
           sh ''' 
+                apt-get update && apt-get install -y pkg-config
                 cd django/
                 pip install -r ../requirements.txt
                 python manage.py test
