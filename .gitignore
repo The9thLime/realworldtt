@@ -1,6 +1,7 @@
 __pycache__
-venv
 *.pyc
 *.sqlite3
 .DS_Store
 .idea/
+django/.env
+venv*/*
