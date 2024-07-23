@@ -37,12 +37,16 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Install runtime dependencies
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
+       gcc \
+       pkg-config \
        libpq-dev \
-       libmariadb3 \
+       libmariadb-dev-compat \
+       libmariadb-dev \
+       python3-dev \
     && apt-get clean
+
 
 # Copy the wheels and install them
 COPY --from=builder /app/wheels /wheels
