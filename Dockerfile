@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED=1
 
 # Install system dependencies
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends gcc curl
+    && apt-get install -y --no-install-recommends gcc
 
 # Install Python dependencies
 COPY requirements.txt .
@@ -18,8 +18,15 @@ RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.t
 
 FROM python:3.9-slim
 
+# Install runtime dependencies
+
 WORKDIR /app
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+       libpq-dev \
+    && apt-get clean
+    
 COPY --from=builder /app/wheels /wheels
 COPY --from=builder /app/requirements.txt .
 RUN pip install --no-cache /wheels/*
