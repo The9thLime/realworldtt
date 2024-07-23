@@ -61,18 +61,30 @@ pipeline {
             }
         }
     }
-     stage('Update Kubernetes Manifest') {
-            steps {
-                container('kubectl') {
-                    script {
-                        sh """
-                            kubectl get pods -n default
-                            kubectl set image deployment/realworldtt-deployment realworldtt=the9thlime/realworldtt:0.0.${BUILD_NUMBER} -n default
-                            kubectl rollout status deployment/realworldtt-deployment -n default
-                        """
-                    }
+    stage('Deploy YAML files') {
+        steps {
+            container('kubectl') {
+                script {
+                    sh '''
+                        kubectl apply -f ./k8s/
+                    '''
                 }
             }
         }
     }
+    stage('Update Kubernetes Manifest') {
+        steps {
+            container('kubectl') {
+                script {
+                    sh '''
+                        kubectl get pods -n default
+                        kubectl set image deployment/realworldtt-deployment realworldtt=the9thlime/realworldtt:0.0.${BUILD_NUMBER} -n default
+                        kubectl rollout status deployment/realworldtt-deployment -n default
+                    '''
+                }
+            }
+        }
+    }
+    
+  }
 }
