@@ -10,7 +10,7 @@ pipeline {
         spec:
           containers:
           - name: python
-            image: python:slim
+            image: python:3.9
             command:
             - cat
             tty: true
@@ -40,7 +40,9 @@ pipeline {
       steps {
         container('python') {
           sh ''' 
-                apt-get update && apt-get install -y pkg-config
+                apt-get update && apt-get install -y \
+                pkg-config \
+                libmysqlclient-dev \
                 cd django/
                 pip install -r ../requirements.txt
                 python manage.py test
