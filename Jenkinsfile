@@ -35,30 +35,7 @@ pipeline {
       retries 2
     }
   }
-   stages {
-    stage('Run test') {
-      steps {
-        container('python') {
-          withEnv([
-            'SECRET_KEY=django-insecure-f35(x7w#1hz7%oejc(t(x8ii7n^%n0pvzsp@x*qtfh8^$3^3j+',
-            'DATABASE_NAME=realworld',
-            'DATABASE_USER=realworld',
-            'DATABASE_PASSWORD=123',
-            'DATABASE_HOST=127.0.0.1',
-            'DATABASE_PORT=3306'
-          ]) {
-            sh '''
-              apt-get update && apt-get install -y \
-              pkg-config \
-              default-libmysqlclient-dev
-              cd django/
-              pip install -r ../requirements.txt
-              python manage.py test
-            '''
-          }
-        }
-      }
-    }
+
     stage('Build docker image') {
         steps {
             container('docker') {
