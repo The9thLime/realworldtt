@@ -39,6 +39,14 @@ pipeline {
     stage('Run test') {
       steps {
         container('python') {
+          withEnv([
+            'SECRET_KEY=default-secret-key',
+            'DATABASE_NAME=test_db_name',
+            'DATABASE_USER=test_db_user',
+            'DATABASE_PASSWORD=test_db_password',
+            'DATABASE_HOST=localhost',
+            'DATABASE_PORT=3306'
+          ])
           sh ''' 
                 apt-get update && apt-get install -y \
                 pkg-config \
