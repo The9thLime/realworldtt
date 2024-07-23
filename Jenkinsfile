@@ -8,6 +8,7 @@ pipeline {
           labels:
             some-label: some-label-value
         spec:
+          serviceAccountName: jenkins
           containers:
           - name: python
             image: python:3.9
