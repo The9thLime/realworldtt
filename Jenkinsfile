@@ -51,17 +51,6 @@ pipeline {
             }
         }
     }
-    stage('Deploy YAML files') {
-        steps {
-            container('kubectl') {
-                script {
-                    sh '''
-                        kubectl apply -f ./k8s/
-                    '''
-                }
-            }
-        }
-    }
     stage('Update Kubernetes Manifest') {
         steps {
             container('kubectl') {
