@@ -46,15 +46,16 @@ pipeline {
             'DATABASE_PASSWORD=test_db_password',
             'DATABASE_HOST=localhost',
             'DATABASE_PORT=3306'
-          ])
-          sh ''' 
-                apt-get update && apt-get install -y \
-                pkg-config \
-                default-libmysqlclient-dev
-                cd django/
-                pip install -r ../requirements.txt
-                python manage.py test
+          ]) {
+            sh '''
+              apt-get update && apt-get install -y \
+              pkg-config \
+              default-libmysqlclient-dev
+              cd django/
+              pip install -r ../requirements.txt
+              python manage.py test
             '''
+          }
         }
       }
     }
@@ -96,6 +97,5 @@ pipeline {
             }
         }
     }
-    
   }
 }
