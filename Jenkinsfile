@@ -42,7 +42,7 @@ pipeline {
           sh ''' 
                 apt-get update && apt-get install -y \
                 pkg-config \
-                libmysqlclient-dev \
+                default-libmysqlclient-dev
                 cd django/
                 pip install -r ../requirements.txt
                 python manage.py test
