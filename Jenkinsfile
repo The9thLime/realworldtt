@@ -35,7 +35,7 @@ pipeline {
       retries 2
     }
   }
-
+   stages {
     stage('Build docker image') {
         steps {
             container('docker') {
