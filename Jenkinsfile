@@ -10,7 +10,7 @@ pipeline {
         spec:
           containers:
           - name: python
-            image: python:slim
+            image: the9thlime/realworldtt:test
             command:
             - cat
             tty: true
