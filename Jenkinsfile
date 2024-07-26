@@ -35,15 +35,14 @@ pipeline {
       retries 2
     }
   }
-  environment {
-        // Fetch secret values from Kubernetes
-        DATABASE_NAME = sh(script: "kubectl get secret django_secrets -o jsonpath='{.data.DATABASE_NAME}' | base64 --decode", returnStdout: true).trim()
-        DATABASE_USER = sh(script: "kubectl get secret django_secrets -o jsonpath='{.data.DATABASE_USER}' | base64 --decode", returnStdout: true).trim()
-        DATABASE_PASSWORD = sh(script: "kubectl get secret django_secrets -o jsonpath='{.data.DATABASE_PASSWORD}' | base64 --decode", returnStdout: true).trim()
-        DATABASE_HOST = sh(script: "kubectl get secret django_secrets -o jsonpath='{.data.DATABASE_HOST}' | base64 --decode", returnStdout: true).trim()
-        DATABASE_PORT = sh(script: "kubectl get secret django_secrets -o jsonpath='{.data.DATABASE_PORT}' | base64 --decode", returnStdout: true).trim()
-        SECRET_KEY = sh(script: "kubectl get secret django_secrets -o jsonpath='{.data.SECRET_KEY}' | base64 --decode", returnStdout: true).trim()
-    }
+  environment{
+    DATABASE_NAME = 'realworld'
+    DATABASE_USER = 'realworld'
+    DATABASE_HOST = 'mysql.default.svc.cluster.local'
+    DATABASE_PORT = '3306'
+    DATABASE_PASSWORD = '123'
+    SECRET_KEY = 'django-insecure-f35(x7w#1hz7%oejc(t(x8ii7n^%n0pvzsp@x*qtfh8^$3^3j+'
+  }
   stages {
     stage('Run test') {
       steps {
@@ -54,7 +53,7 @@ pipeline {
                 export DATABASE_PASSWORD=${DATABASE_PASSWORD}
                 export DATABASE_HOST=${DATABASE_HOST}
                 export DATABASE_PORT=${DATABASE_PORT}
-                export DATABASE_NAME=${SECRET_KEY}
+                export SECRET_KEY=${SECRET_KEY}
                 echo $DATABASE_NAME
                 cd django/
                 pip install -r ../requirements.txt
