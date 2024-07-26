@@ -8,10 +8,9 @@ pipeline {
           labels:
             some-label: some-label-value
         spec:
-          serviceAccountName: jenkins
           containers:
           - name: python
-            image: python:3.9
+            image: python:slim
             command:
             - cat
             tty: true
@@ -36,33 +35,44 @@ pipeline {
       retries 2
     }
   }
-   stages {
+  stages {
+    stage('Run test') {
+      steps {
+        container('python') {
+          sh ''' 
+                cd django/
+                pip install -r ../requirements.txt
+                python manage.py test
+            '''
+        }
+      }
+    }
     stage('Build docker image') {
         steps {
             container('docker') {
                 sh '''
-                    docker build -t the9thlime/realworldtt:0.0.${BUILD_NUMBER} .
+                    docker build -t the9thlime/realworldtt:0.0.${BUILD_NUMBER}.dev .
                 '''
                 script {
                     withDockerRegistry([credentialsId: "dockerhub", url: 'https://index.docker.io/v1/']) {
-                        sh 'docker push the9thlime/realworldtt:0.0.${BUILD_NUMBER}'
+                        sh 'docker push the9thlime/realworldtt:0.0.${BUILD_NUMBER}.dev'
                     }
                 }
             }
         }
     }
-    stage('Update Kubernetes Manifest') {
-        steps {
-            container('kubectl') {
-                script {
-                    sh '''
-                        kubectl get pods -n default
-                        kubectl set image deployment/realworldtt-deployment realworldtt=the9thlime/realworldtt:0.0.${BUILD_NUMBER} -n default
-                        kubectl rollout status deployment/realworldtt-deployment -n default
-                    '''
+     stage('Update Kubernetes Manifest') {
+            steps {
+                container('kubectl') {
+                    script {
+                        sh """
+                            kubectl get pods -n default
+                            kubectl set image deployment/realworldtt-deployment realworldtt=the9thlime/realworldtt:0.0.${BUILD_NUMBER} -n default
+                            kubectl rollout status deployment/realworldtt-deployment -n default
+                        """
+                    }
                 }
             }
         }
     }
-  }
 }
