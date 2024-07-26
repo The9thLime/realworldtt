@@ -35,11 +35,27 @@ pipeline {
       retries 2
     }
   }
+  environment {
+        // Fetch secret values from Kubernetes
+        DATABASE_NAME = sh(script: "kubectl get secret django_secrets -o jsonpath='{.data.DATABASE_NAME}' | base64 --decode", returnStdout: true).trim()
+        DATABASE_USER = sh(script: "kubectl get secret django_secrets -o jsonpath='{.data.DATABASE_USER}' | base64 --decode", returnStdout: true).trim()
+        DATABASE_PASSWORD = sh(script: "kubectl get secret django_secrets -o jsonpath='{.data.DATABASE_PASSWORD}' | base64 --decode", returnStdout: true).trim()
+        DATABASE_HOST = sh(script: "kubectl get secret django_secrets -o jsonpath='{.data.DATABASE_HOST}' | base64 --decode", returnStdout: true).trim()
+        DATABASE_PORT = sh(script: "kubectl get secret django_secrets -o jsonpath='{.data.DATABASE_PORT}' | base64 --decode", returnStdout: true).trim()
+        SECRET_KEY = sh(script: "kubectl get secret django_secrets -o jsonpath='{.data.SECRET_KEY}' | base64 --decode", returnStdout: true).trim()
+    }
   stages {
     stage('Run test') {
       steps {
         container('python') {
           sh ''' 
+                export DATABASE_NAME=${DATABASE_NAME}
+                export DATABASE_USER=${DATABASE_USER}
+                export DATABASE_PASSWORD=${DATABASE_PASSWORD}
+                export DATABASE_HOST=${DATABASE_HOST}
+                export DATABASE_PORT=${DATABASE_PORT}
+                export DATABASE_NAME=${SECRET_KEY}
+                echo $DATABASE_NAME
                 cd django/
                 pip install -r ../requirements.txt
                 python manage.py test
