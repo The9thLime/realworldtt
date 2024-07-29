@@ -59,20 +59,6 @@ pipeline {
     SECRET_KEY = 'django-insecure-f35(x7w#1hz7%oejc(t(x8ii7n^%n0pvzsp@x*qtfh8^$3^3j+'
   }
   stages {
-
-    stage('Wait for MySQL') {
-      steps {
-        container('mysql') {
-          sh '''
-            echo "Waiting for MySQL to be ready..."
-            while ! mysqladmin ping -h"$DATABASE_HOST" --silent; do
-              sleep 1
-            done
-          '''
-        }
-      }
-    }
-
     stage('Run test') {
       steps {
         container('python') {
