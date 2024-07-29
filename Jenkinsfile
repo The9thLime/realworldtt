@@ -45,7 +45,7 @@ pipeline {
           volumes:
           - name: mysql
             hostPath:
-              path: /var/run/mysqld/mysqld.sock
+              path: /run/mysqld/mysqld.sock
           - name: docker-sock
             hostPath:
               path: /var/run/docker.sock   
