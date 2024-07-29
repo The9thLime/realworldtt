@@ -64,7 +64,7 @@ pipeline {
                 container('mysql') {
                     sh '''
                         echo "Waiting for MySQL to be ready..."
-                        while ! mysqladmin ping --pasword=123 --silent; do
+                        while ! mysqladmin ping --password=123 --silent; do
                             sleep 1
                         done
                     '''
