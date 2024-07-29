@@ -53,7 +53,7 @@ pipeline {
   environment{
     DATABASE_NAME = 'realworld'
     DATABASE_USER = 'realworld'
-    DATABASE_HOST = 'mysql'
+    DATABASE_HOST = 'localhost'
     DATABASE_PORT = '3306'
     DATABASE_PASSWORD = '123'
     SECRET_KEY = 'django-insecure-f35(x7w#1hz7%oejc(t(x8ii7n^%n0pvzsp@x*qtfh8^$3^3j+'
