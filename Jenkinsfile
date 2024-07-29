@@ -29,8 +29,6 @@ pipeline {
                name: docker-sock
           - name: mysql
             image: mysql:latest
-            command:
-            - cat
             tty: true
             env:
             - name: MYSQL_ROOT_PASSWORD
@@ -39,8 +37,7 @@ pipeline {
               value: 'realworld'
             - name: MYSQL_PASSWORD
               value: '123'
-            command:
-            - --default-authentication-plugin=mysql_native_password
+            
             ports:
             - containerPort: 3306
               name: mysql
