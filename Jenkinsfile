@@ -27,6 +27,24 @@ pipeline {
             volumeMounts:
              - mountPath: /var/run/docker.sock
                name: docker-sock
+          - name: mysql
+            image: mysql:latest
+            command:
+            - cat
+            tty: true
+            env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: '123'
+            - name: MYSQL_USER
+              value: 'realworld'
+            - name: MYSQL_PASSWORD
+              value: '123'
+            command:
+            - --default-authentication-plugin=mysql_native_password
+            ports:
+            - containerPort: 3306
+              name: MySQL
+
           volumes:
           - name: docker-sock
             hostPath:
@@ -38,12 +56,26 @@ pipeline {
   environment{
     DATABASE_NAME = 'realworld'
     DATABASE_USER = 'realworld'
-    DATABASE_HOST = 'mysql.default.svc.cluster.local'
+    DATABASE_HOST = 'mysql'
     DATABASE_PORT = '3306'
     DATABASE_PASSWORD = '123'
     SECRET_KEY = 'django-insecure-f35(x7w#1hz7%oejc(t(x8ii7n^%n0pvzsp@x*qtfh8^$3^3j+'
   }
   stages {
+
+    stage('Wait for MySQL') {
+      steps {
+        container('mysql') {
+          sh '''
+            echo "Waiting for MySQL to be ready..."
+            while ! mysqladmin ping -h"$DATABASE_HOST" --silent; do
+              sleep 1
+            done
+          '''
+        }
+      }
+    }
+
     stage('Run test') {
       steps {
         container('python') {
@@ -62,6 +94,7 @@ pipeline {
         }
       }
     }
+
     stage('Build docker image') {
         steps {
             container('docker') {
@@ -76,6 +109,7 @@ pipeline {
             }
         }
     }
+
      stage('Update Kubernetes Manifest') {
             steps {
                 container('kubectl') {
