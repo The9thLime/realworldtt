@@ -43,7 +43,7 @@ pipeline {
             - --default-authentication-plugin=mysql_native_password
             ports:
             - containerPort: 3306
-              name: MySQL
+              name: 'MySQL'
 
           volumes:
           - name: docker-sock
