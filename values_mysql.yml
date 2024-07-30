@@ -123,18 +123,18 @@ auth:
   ## @param auth.createDatabase Whether to create the .Values.auth.database or not
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#creating-a-database-on-first-run
   ##
-  createDatabase: true
+  createDatabase: false
   ## @param auth.database Name for a custom database to create
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#creating-a-database-on-first-run
   ##
-  database: "realworld"
+  database: ""
   ## @param auth.username Name for a custom user to create
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#creating-a-database-user-on-first-run
   ##
-  username: "realworld"
+  username: ""
   ## @param auth.password Password for the new user. Ignored if existing secret is provided
   ##
-  password: "123"
+  password: ""
   ## @param auth.replicationUser MySQL replication user
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mysql#setting-up-a-replication-cluster
   ##
@@ -176,10 +176,9 @@ initdbScripts:
     GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123' WITH GRANT OPTION;
     GRANT ALL PRIVILEGES ON realworld.* TO 'realworld'@'%';
     FLUSH PRIVILEGES;
-
-
 ## @param initdbScriptsConfigMap ConfigMap with the initdb scripts (Note: Overrides `initdbScripts`)
 ##
+
 initdbScriptsConfigMap: ""
 ## @param startdbScripts Dictionary of startdb scripts
 ## Specify dictionary of scripts to be run every time the container is started
