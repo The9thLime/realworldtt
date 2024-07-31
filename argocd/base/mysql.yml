@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mysql
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  sources:
+  - repoURL: 'https://charts.bitnami.com/bitnami'
+    targetRevision: 11.1.14
+    chart: mysql
+    helm:
+      valueFiles:
+      - $values/values_mysql.yml
+  - repoURL: 'https://github.com/the9thlime/realworldtt.git'
+    targetRevision: dev
+    ref: values
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false

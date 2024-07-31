@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jenkins
+spec:
+  destination:
+    name: ''
+    namespace: 'devops-tools'
+    server: 'https://kubernetes.default.svc'
+  sources:
+    - repoURL: 'https://charts.jenkins.io/'
+      targetRevision: 5.5.0
+      chart: jenkins
+      helm:
+        valueFiles:
+          - $values/values_jenkins.yml
+    - repoURL: 'https://github.com/the9thlime/realworldtt.git'
+      targetRevision: dev
+      ref: values
+  project: default
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+
