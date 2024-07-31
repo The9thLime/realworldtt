@@ -15,7 +15,7 @@ spec:
       valueFiles:
       - $values/values_mysql.yml
   - repoURL: 'https://github.com/the9thlime/realworldtt.git'
-    targetRevision: dev
+    targetRevision: HEAD
     ref: values
   project: default
   syncPolicy:
