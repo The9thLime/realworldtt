@@ -10,7 +10,7 @@ spec:
   source:
     path: ./k8s/
     repoURL: 'https://github.com/the9thlime/realworldtt/'
-    targetRevision: main
+    targetRevision: HEAD
   sources: []
   project: default
   syncPolicy:

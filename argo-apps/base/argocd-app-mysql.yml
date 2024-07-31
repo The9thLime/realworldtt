@@ -13,7 +13,7 @@ spec:
     chart: mysql
     helm:
       valueFiles:
-      - $values/values_mysql.yml
+      - $values/values/values-mysql.yml
   - repoURL: 'https://github.com/the9thlime/realworldtt.git'
     targetRevision: HEAD
     ref: values

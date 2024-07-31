@@ -13,9 +13,9 @@ spec:
       chart: jenkins
       helm:
         valueFiles:
-          - $values/values_jenkins.yml
+          - $values/values/values-jenkins.yml
     - repoURL: 'https://github.com/the9thlime/realworldtt.git'
-      targetRevision: dev
+      targetRevision: HEAD
       ref: values
   project: default
   syncPolicy:
