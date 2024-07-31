@@ -67,6 +67,7 @@ pipeline {
                         while ! mysqladmin ping -hlocalhost --silent; do
                             sleep 1
                         done
+                        echo "MySQL is up and running!"
                     '''
                 }
             }
