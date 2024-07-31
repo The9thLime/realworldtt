@@ -173,8 +173,8 @@ initdbScripts:
   init.sql: |
     CREATE DATABASE realworld;
     CREATE USER 'realworld'@'%' IDENTIFIED BY '123';
-    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123' WITH GRANT OPTION;
     GRANT ALL PRIVILEGES ON realworld.* TO 'realworld'@'%';
+    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
     FLUSH PRIVILEGES;
 ## @param initdbScriptsConfigMap ConfigMap with the initdb scripts (Note: Overrides `initdbScripts`)
 ##
