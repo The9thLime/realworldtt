@@ -2,10 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: app-of-apps
+  namespace: default
 spec:
   destination:
-    name: in-cluster
+    name: ''
     namespace: default
+    server: 'https://kubernetes.default.svc'
   source:
     path: ./argocd-apps/base/ 
     repoURL: 'https://github.com/the9thlime/realworldtt/'
