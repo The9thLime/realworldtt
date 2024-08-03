@@ -33,12 +33,8 @@ pipeline {
             env:
             - name: MYSQL_ROOT_PASSWORD
               value: '123'
-            - name: MYSQL_USER
-              value: 'realworld'
-            - name: MYSQL_PASSWORD
-              value: '123'
-            - name: MYSQL_HOST
-              value: ""
+            - name: MYSQL_DATABASE
+              value: 'test_db'
             
             ports:
             - containerPort: 3306
@@ -51,14 +47,6 @@ pipeline {
         '''
       retries 2
     }
-  }
-  environment{
-    DATABASE_NAME = 'realworld'
-    DATABASE_USER = 'realworld'
-    DATABASE_HOST = 'localhost'
-    DATABASE_PORT = '3306'
-    DATABASE_PASSWORD = '123'
-    SECRET_KEY = 'django-insecure-f35(x7w#1hz7%oejc(t(x8ii7n^%n0pvzsp@x*qtfh8^$3^3j+'
   }
   stages {
     stage('Wait for MySQL') {
@@ -78,14 +66,7 @@ pipeline {
       steps {
         container('python') {
           sh ''' 
-                export DATABASE_NAME=${DATABASE_NAME}
-                export DATABASE_USER=${DATABASE_USER}
-                export DATABASE_PASSWORD=${DATABASE_PASSWORD}
-                export DATABASE_HOST=${DATABASE_HOST}
-                export DATABASE_PORT=${DATABASE_PORT}
-                export SECRET_KEY=${SECRET_KEY}
                 echo $DATABASE_NAME
-
                 cd django/
                 pip install -r ../requirements.txt
                 python manage.py test

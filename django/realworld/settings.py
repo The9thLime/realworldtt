@@ -21,7 +21,7 @@ env_path = Path(__file__).resolve().parent.parent / '.env'
 load_dotenv(dotenv_path=env_path)
 
 # Secret key should not be present in the configuration or the repository
-SECRET_KEY=os.getenv('SECRET_KEY')
+SECRET_KEY=os.getenv('SECRET_KEY','123720820341')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,10 +84,10 @@ WSGI_APPLICATION = "realworld.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": os.getenv("DATABASE_NAME"),
-        "USER": os.getenv("DATABASE_USER"),
-        "PASSWORD": os.getenv("DATABASE_PASSWORD"),
-        "HOST": os.getenv("DATABASE_HOST"),
+        "NAME": os.getenv("DATABASE_NAME","test_db"),
+        "USER": os.getenv("DATABASE_USER","root"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD","123"),
+        "HOST": os.getenv("DATABASE_HOST","127.0.0.1"),
         "PORT": os.getenv("DATABASE_PORT", "3306"),
     }
 }
