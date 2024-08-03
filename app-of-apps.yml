@@ -4,9 +4,8 @@ metadata:
   name: app-of-apps
 spec:
   destination:
-    name: ''
+    name: in-cluster
     namespace: default
-    server: 'https://kubernetes.default.svc'
   source:
     path: ./argocd-apps/base/ 
     repoURL: 'https://github.com/the9thlime/realworldtt/'
