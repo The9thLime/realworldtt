@@ -68,7 +68,6 @@ pipeline {
           sh ''' 
                 echo $DATABASE_NAME
                 cd django/
-                pip install -r ../requirements.txt
                 python manage.py test
             '''
         }
