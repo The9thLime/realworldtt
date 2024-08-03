@@ -37,6 +37,8 @@ pipeline {
               value: 'realworld'
             - name: MYSQL_PASSWORD
               value: '123'
+            - name: MYSQL_HOST
+              value: ""
             
             ports:
             - containerPort: 3306
