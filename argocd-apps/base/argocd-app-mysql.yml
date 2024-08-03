@@ -5,7 +5,7 @@ metadata:
 spec:
   destination:
     name: ''
-    namespace: default
+    namespace: realworld
     server: 'https://kubernetes.default.svc'
   sources:
   - repoURL: 'https://charts.bitnami.com/bitnami'
@@ -22,3 +22,5 @@ spec:
     automated:
       prune: false
       selfHeal: false
+    syncOptions:
+      - CreateNamespace=true

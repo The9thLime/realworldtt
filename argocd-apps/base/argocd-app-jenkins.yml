@@ -5,7 +5,7 @@ metadata:
 spec:
   destination:
     name: ''
-    namespace: 'devops-tools'
+    namespace: realworld
     server: 'https://kubernetes.default.svc'
   sources:
     - repoURL: 'https://charts.jenkins.io/'

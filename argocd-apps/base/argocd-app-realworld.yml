@@ -5,7 +5,7 @@ metadata:
 spec:
   destination:
     name: ''
-    namespace: default
+    namespace: realworld
     server: 'https://kubernetes.default.svc'
   source:
     path: ./k8s/
@@ -17,4 +17,5 @@ spec:
     automated:
       prune: false
       selfHeal: false
-
+    syncOptions:
+      - CreateNamespace=true
