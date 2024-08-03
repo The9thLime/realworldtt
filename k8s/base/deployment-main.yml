@@ -21,6 +21,10 @@ spec:
           image: the9thlime/realworldtt:latest
           ports:
             - containerPort: 8010
+          resources:
+            limits:
+              cpu: 2000
+              memory: 450Mi
           env:
             - name: SECRET_KEY
               valueFrom:
