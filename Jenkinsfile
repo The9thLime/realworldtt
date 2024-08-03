@@ -66,7 +66,7 @@ pipeline {
                 container('mysql') {
                     sh '''
                         echo "Waiting for MySQL to be ready..."
-                        while ! mysqladmin ping -h mysql --silent; do
+                        while ! mysqladmin ping -h"127.0.0.1" --silent; do
                             sleep 1
                         done
                         echo "MySQL is up and running!"
