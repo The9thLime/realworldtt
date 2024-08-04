@@ -14,11 +14,6 @@ pipeline {
             command:
             - cat
             tty: true
-          - name: kubectl
-            image: alpine/k8s:1.30.3
-            command:
-            - cat
-            tty: true
           - name: docker
             image: docker:latest
             command:
@@ -35,15 +30,23 @@ pipeline {
               value: '123'
             - name: MYSQL_DATABASE
               value: 'test_db'
-            
             ports:
             - containerPort: 3306
               name: mysql
-
+          - name: sedgit
+            image: the9thlime/sedgit:latest
+            command:
+            - cat
+            tty: true
+            volumeMounts:
+                - mountPath: /workspace
+                  name: workspace
           volumes:
           - name: docker-sock
             hostPath:
               path: /var/run/docker.sock   
+           - name: workspace
+                emptyDir: {}
         '''
       retries 2
     }
@@ -77,12 +80,12 @@ pipeline {
     stage('Build docker image') {
         steps {
             container('docker') {
-                sh '''
-                    docker build -t the9thlime/realworldtt:0.0.${BUILD_NUMBER}.dev .
-                '''
                 script {
                     withDockerRegistry([credentialsId: "dockerhub", url: 'https://index.docker.io/v1/']) {
-                        sh 'docker push the9thlime/realworldtt:0.0.${BUILD_NUMBER}.dev'
+                        sh 'docker build -t the9thlime/realworldtt:0.0.${BUILD_NUMBER} .'
+                        sh 'docker push the9thlime/realworldtt:0.0.${BUILD_NUMBER}'
+                        sh 'docker tag the9thlime/realworldtt:0.0.${BUILD_NUMBER} the9thlime/realworldtt:latest'
+                        sh 'docker push the9thlime/realworldtt:latest'
                     }
                 }
             }
@@ -91,12 +94,14 @@ pipeline {
 
      stage('Update Kubernetes Manifest') {
             steps {
-                container('kubectl') {
+                container('sedgit') {
                     script {
                         sh """
-                            kubectl get pods -n default
-                            kubectl set image deployment/realworldtt-deployment realworldtt=the9thlime/realworldtt:0.0.${BUILD_NUMBER} -n default
-                            kubectl rollout status deployment/realworldtt-deployment -n default
+                            git clone https://github.com/the9thlime/realworldtt && cd ./realworldtt/k8s/base/
+                            sed -i 's/realworldtt:[^ ]*/realworldtt:0.0.${BUILD_NUMBER}/' deployment-main.yml
+                            git add deployment-main.yml
+                            git commit -m "Patched manifest with new image tag '${BUILD_NUMBER}'"
+                            git push origin
                         """
                     }
                 }
@@ -104,3 +109,5 @@ pipeline {
         }
     }
 }
+
+
