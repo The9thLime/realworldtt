@@ -56,7 +56,8 @@ spec:
         container('build') {
           sh ''' 
                 echo $DATABASE_NAME
-                ls
+                python3 -m venv venv
+                source venv/bin/activate
                 pip install -r requirements.txt
                 cd django/
                 python manage.py test
