@@ -102,6 +102,8 @@ spec:
                             echo "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
                             git clone git@github.com:The9thLime/realworldtt.git realworld
                             cd realworld
+                            touch testfile
+                            git add testfile && git commit -m "automation" && git push 
                         """
                         }
                   }
