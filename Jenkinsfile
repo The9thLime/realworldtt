@@ -9,19 +9,14 @@ metadata:
     some-label: some-label-value
 spec:
   containers:
-  - name: python
-    image: the9thlime/realworldtt:test
-    command:
-    - cat
-    tty: true
-  - name: docker
-    image: docker:latest
+  - name: build
+    image: sedgit:latest 
     command:
     - cat
     tty: true
     volumeMounts:
     - mountPath: /var/run/docker.sock
-      name: docker-sock
+      name: docker-sock   
   - name: mysql
     image: mysql:latest
     tty: true
@@ -33,11 +28,6 @@ spec:
     ports:
     - containerPort: 3306
       name: mysql
-  - name: git
-    image: ubuntu:latest
-    command:
-    - cat
-    tty: true
   volumes:
   - name: docker-sock
     hostPath:
@@ -48,56 +38,59 @@ spec:
     }
   }
   stages {
-    // stage('Wait for MySQL') {
-    //         steps {
-    //             container('mysql') {
-    //                 sh '''
-    //                     echo "Waiting for MySQL to be ready..."
-    //                     while ! mysqladmin ping -h"127.0.0.1" --silent; do
-    //                         sleep 1
-    //                     done
-    //                     echo "MySQL is up and running!"
-    //                 '''
-    //             }
-    //         }
-    //     }
-    // stage('Run test') {
-    //   steps {
-    //     container('python') {
-    //       sh ''' 
-    //             echo $DATABASE_NAME
-    //             cd django/
-    //             python manage.py test
-    //         '''
-    //     }
-    //   }
-    // }
+    stage('Wait for MySQL') {
+            steps {
+                container('mysql') {
+                    sh '''
+                        echo "Waiting for MySQL to be ready..."
+                        while ! mysqladmin ping -h"127.0.0.1" --silent; do
+                            sleep 1
+                        done
+                        echo "MySQL is up and running!"
+                    '''
+                }
+            }
+        }
+    stage('Run test') {
+      steps {
+        container('build') {
+          sh ''' 
+                echo $DATABASE_NAME
+                ls
+                pip install -r requirements.txt
+                cd django/
+                python manage.py test
+            '''
+        }
+      }
+    }
 
-    // stage('Build docker image') {
-    //     steps {
-    //         container('docker') {
-    //             script {
-    //                 withDockerRegistry([credentialsId: "dockerhub", url: 'https://index.docker.io/v1/']) {
-    //                     sh 'docker build -t the9thlime/realworldtt:0.0.${BUILD_NUMBER} .'
-    //                     sh 'docker push the9thlime/realworldtt:0.0.${BUILD_NUMBER}'
-    //                     sh 'docker tag the9thlime/realworldtt:0.0.${BUILD_NUMBER} the9thlime/realworldtt:latest'
-    //                     sh 'docker push the9thlime/realworldtt:latest'
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    stage('Build docker image') {
+        steps {
+            container('build') {
+                script {
+                    withDockerRegistry([credentialsId: "dockerhub", url: 'https://index.docker.io/v1/']) {
+                        sh 'docker build -t the9thlime/realworldtt:0.0.${BUILD_NUMBER} .'
+                        sh 'docker push the9thlime/realworldtt:0.0.${BUILD_NUMBER}'
+                        sh 'docker tag the9thlime/realworldtt:0.0.${BUILD_NUMBER} the9thlime/realworldtt:latest'
+                        sh 'docker push the9thlime/realworldtt:latest'
+                    }
+                }
+            }
+        }
+    }
 
      stage('Update Kubernetes Manifest') {
             steps { 
               withCredentials([sshUserPrivateKey(credentialsId: 'github', keyFileVariable: 'KEY')]){
-                container('git') {
+                container('build') {
                     script {
                         sh """
-                            apt update && apt install -y openssh-client git
                             eval `ssh-agent -s`
                             trap "ssh-agent -k" EXIT
                             ssh-add "$KEY"
+                            git config --global user.email "ayushj0909@outlook.com"
+                            git config --global user.name "Ayush Jain"
                             mkdir -p ~/.ssh
                             echo "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
                             git clone git@github.com:The9thLime/realworldtt.git realworld
