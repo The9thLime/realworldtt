@@ -2,13 +2,13 @@ pipeline {
   agent {
     kubernetes {
       yaml '''
-        apiVersion: v1
-        kind: Pod
-        metadata:
-          labels:
-            some-label: some-label-value
-        spec:
-          containers:
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        labels:
+          some-label: some-label-value
+      spec:
+        containers:
           - name: python
             image: the9thlime/realworldtt:test
             command:
