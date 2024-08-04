@@ -93,6 +93,8 @@ spec:
                 container('sedgit') {
                     script {
                         sh """
+                            git config --global user.email "ayushj0909@outlook.com"
+                            git config --global user.name "Ayush Jain"
                             git clone https://github.com/the9thlime/realworldtt && cd ./realworldtt/k8s/base/
                             sed -i 's/realworldtt:[^ ]*/realworldtt:0.0.${BUILD_NUMBER}/' deployment-main.yml
                             git add deployment-main.yml
