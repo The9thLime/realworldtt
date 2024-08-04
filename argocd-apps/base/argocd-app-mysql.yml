@@ -2,6 +2,11 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: mysql
+  annotations: 
+    argocd.argoproj.io/sync-wave: -1
+    argocd.argoproj.io/hool: PreSync
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: ''
