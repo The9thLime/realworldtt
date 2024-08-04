@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
   - name: build
-    image: sedgit:latest 
+    image: the9thlime/sedgit:latest
     command:
     - cat
     tty: true
