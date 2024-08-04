@@ -38,15 +38,9 @@ pipeline {
             command:
             - cat
             tty: true
-            volumeMounts:
-            - mountPath: /workspace
-              name: workspace
-          volumes:
           - name: docker-sock
             hostPath:
               path: /var/run/docker.sock   
-          - name: workspace
-              emptyDir: {}
         '''
       retries 2
     }
@@ -109,5 +103,3 @@ pipeline {
         }
     }
 }
-
-
