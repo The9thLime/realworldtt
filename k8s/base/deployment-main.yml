@@ -23,8 +23,12 @@ spec:
             - containerPort: 8010
           resources:
             limits:
-              cpu: 1000
+              cpu: 500m
               memory: 350Mi
+            requests:
+              cpu: 250m
+              memory: 200Mi
+
           env:
             - name: SECRET_KEY
               valueFrom:
