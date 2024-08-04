@@ -94,7 +94,7 @@ spec:
                 container('sedgit') {
                     script {
                         sh """
-                            git -c core.sshCommand="ssh -i $KEY" submodule update init
+                            mkdir ~/.ssh/ && touch ~/.ssh/jenkins && echo $KEY >> ~/.ssh/jenkins
                             git config --global user.email "ayushj0909@outlook.com"
                             git config --global user.name "Ayush Jain"
                             git clone https://github.com/the9thlime/realworldtt && cd ./realworldtt/k8s/base/
