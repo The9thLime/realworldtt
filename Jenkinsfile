@@ -33,8 +33,8 @@ spec:
     ports:
     - containerPort: 3306
       name: mysql
-  - name: sedgit
-    image: the9thlime/sedgit:latest
+  - name: git
+    image: ubuntu:latest
     command:
     - cat
     tty: true
@@ -91,17 +91,14 @@ spec:
      stage('Update Kubernetes Manifest') {
             steps { 
               withCredentials([sshUserPrivateKey(credentialsId: 'github', keyFileVariable: 'KEY')]){
-                container('sedgit') {
+                container('git') {
                     script {
                         sh """
-                            mkdir ~/.ssh/ && touch ~/.ssh/jenkins && echo $KEY >> ~/.ssh/jenkins
-                            git config --global user.email "ayushj0909@outlook.com"
-                            git config --global user.name "Ayush Jain"
-                            git clone https://github.com/the9thlime/realworldtt && cd ./realworldtt/k8s/base/
-                            sed -i 's/realworldtt:[^ ]*/realworldtt:0.0.${BUILD_NUMBER}/' deployment-main.yml
-                            git add deployment-main.yml
-                            git commit -m "Patched manifest with new image tag '${BUILD_NUMBER}'"
-                            git push origin
+                            eval `ssh-agent -s`
+                            trap "ssh-agent -k" EXIT
+                            ssh-add "$KEY"
+                            git clone git@github.com:The9thLime/realworldtt.git realworld
+                            cd realworld
                         """
                         }
                   }
