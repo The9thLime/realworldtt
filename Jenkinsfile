@@ -2,46 +2,47 @@ pipeline {
   agent {
     kubernetes {
       yaml '''
-      apiVersion: v1
-      kind: Pod
-      metadata:
-        labels:
-          some-label: some-label-value
-      spec:
-        containers:
-          - name: python
-            image: the9thlime/realworldtt:test
-            command:
-            - cat
-            tty: true
-          - name: docker
-            image: docker:latest
-            command:
-            - cat
-            tty: true
-            volumeMounts:
-            - mountPath: /var/run/docker.sock
-              name: docker-sock
-          - name: mysql
-            image: mysql:latest
-            tty: true
-            env:
-            - name: MYSQL_ROOT_PASSWORD
-              value: '123'
-            - name: MYSQL_DATABASE
-              value: 'test_db'
-            ports:
-            - containerPort: 3306
-              name: mysql
-          - name: sedgit
-            image: the9thlime/sedgit:latest
-            command:
-            - cat
-            tty: true
-          volumes:
-          - name: docker-sock
-            hostPath:
-              path: /var/run/docker.sock
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: python
+    image: the9thlime/realworldtt:test
+    command:
+    - cat
+    tty: true
+  - name: docker
+    image: docker:latest
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+    - mountPath: /var/run/docker.sock
+      name: docker-sock
+  - name: mysql
+    image: mysql:latest
+    tty: true
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: '123'
+    - name: MYSQL_DATABASE
+      value: 'test_db'
+    ports:
+    - containerPort: 3306
+      name: mysql
+  - name: sedgit
+    image: the9thlime/sedgit:latest
+    command:
+    - cat
+    tty: true
+  volumes:
+  - name: docker-sock
+    hostPath:
+      path: /var/run/docker.sock
+
         '''
       retries 2
     }
