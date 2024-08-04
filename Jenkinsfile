@@ -20,8 +20,8 @@ pipeline {
             - cat
             tty: true
             volumeMounts:
-             - mountPath: /var/run/docker.sock
-               name: docker-sock
+            - mountPath: /var/run/docker.sock
+              name: docker-sock
           - name: mysql
             image: mysql:latest
             tty: true
@@ -39,14 +39,14 @@ pipeline {
             - cat
             tty: true
             volumeMounts:
-                - mountPath: /workspace
-                  name: workspace
+            - mountPath: /workspace
+              name: workspace
           volumes:
           - name: docker-sock
             hostPath:
               path: /var/run/docker.sock   
-           - name: workspace
-                emptyDir: {}
+          - name: workspace
+              emptyDir: {}
         '''
       retries 2
     }
