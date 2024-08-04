@@ -90,10 +90,11 @@ spec:
 
      stage('Update Kubernetes Manifest') {
             steps { 
-              withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]){
+              withCredentials([sshUserPrivateKey(credentialsId: 'github', keyFileVariable: 'KEY')]){
                 container('sedgit') {
                     script {
                         sh """
+                            git -c core.sshCommand="ssh -i $KEY" submodule update init
                             git config --global user.email "ayushj0909@outlook.com"
                             git config --global user.name "Ayush Jain"
                             git clone https://github.com/the9thlime/realworldtt && cd ./realworldtt/k8s/base/
