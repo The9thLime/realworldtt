@@ -98,7 +98,7 @@ spec:
                             eval `ssh-agent -s`
                             trap "ssh-agent -k" EXIT
                             ssh-add "$KEY"
-                            git clone git@github.com:The9thLime/realworldtt.git realworld
+                            git clone -o StrictHostKeyChecking=no git@github.com:The9thLime/realworldtt.git realworld
                             cd realworld
                         """
                         }
