@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: jenkins
   annotations: 
-    argocd.argoproj.io/sync-wave: 0
+    argocd.argoproj.io/sync-wave: "0"
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -12,15 +12,15 @@ spec:
     namespace: devops-tools
     server: 'https://kubernetes.default.svc'
   sources:
-    - repoURL: 'https://charts.jenkins.io/'
-      targetRevision: 5.5.0
-      chart: jenkins
-      helm:
-        valueFiles:
-          - $values/values/values-jenkins.yml
-    - repoURL: 'https://github.com/the9thlime/realworldtt.git'
-      targetRevision: HEAD
-      ref: values
+  - repoURL: 'https://charts.jenkins.io/'
+    targetRevision: 5.5.0
+    chart: jenkins
+    helm:
+      valueFiles:
+        - $values/values/values-jenkins.yml
+  - repoURL: 'https://github.com/the9thlime/realworldtt.git'
+    targetRevision: HEAD
+    ref: values
   project: default
   syncPolicy:
     automated: {}
