@@ -89,7 +89,8 @@ spec:
     }
 
      stage('Update Kubernetes Manifest') {
-            steps {
+            steps { 
+              withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]){
                 container('sedgit') {
                     script {
                         sh """
