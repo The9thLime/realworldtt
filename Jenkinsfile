@@ -102,9 +102,10 @@ spec:
                             git commit -m "Patched manifest with new image tag '${BUILD_NUMBER}'"
                             git push origin
                         """
-                    }
-                }
+                        }
+                  }
+              }
             }
-        }
     }
+  }
 }
