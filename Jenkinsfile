@@ -94,6 +94,7 @@ spec:
                 container('git') {
                     script {
                         sh """
+                            apt update && apt install -y openssh-client
                             eval `ssh-agent -s`
                             trap "ssh-agent -k" EXIT
                             ssh-add "$KEY"
