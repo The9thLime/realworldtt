@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
   - name: build
-    image: the9thlime/sedgit:latest
+    image: the9thlime/builder:latest
     command:
     - cat
     tty: true
@@ -87,17 +87,16 @@ spec:
                 container('build') {
                     script {
                         sh """
+                            mkdir -p ~/.ssh && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
                             eval `ssh-agent -s`
                             trap "ssh-agent -k" EXIT
                             ssh-add "$KEY"
                             git config --global user.email "ayushj0909@outlook.com"
                             git config --global user.name "Ayush Jain"
-                            mkdir -p ~/.ssh
-                            echo "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-                            git clone git@github.com:The9thLime/realworldtt.git realworld
-                            cd realworld
-                            touch testfile
-                            git add testfile && git commit -m "automation" && git push 
+                            git clone git@github.com:The9thLime/realworldtt.git
+                            cd realworldtt/k8s/base
+                            sed -i 's/realworldtt:[^ ]*/realworldtt:0.0.${BUILD_NUMBER}/' deployment-main.yml
+                            git add testfile && git commit -m "automation" --allow-empty && git push
                         """
                         }
                   }
