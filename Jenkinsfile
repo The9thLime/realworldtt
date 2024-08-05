@@ -96,7 +96,7 @@ spec:
                             git clone git@github.com:The9thLime/realworldtt.git
                             cd realworldtt/k8s/base
                             sed -i 's/realworldtt:[^ ]*/realworldtt:0.0.${BUILD_NUMBER}/' deployment-main.yml
-                            git add testfile && git commit -m "automation" --allow-empty && git push
+                            git add deployment-main.yml && git commit -m "Patched with new image version" && git push
                         """
                         }
                   }
