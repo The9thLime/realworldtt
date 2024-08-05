@@ -6,3 +6,5 @@ __pycache__
 django/.env
 venv*/*
 temp/
+infrastructure/terraform/aws/.*
+infrastructure/terraform/aws/*state*
