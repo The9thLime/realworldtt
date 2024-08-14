@@ -61,10 +61,3 @@ spec:
                   name: django-secrets
                   key: DATABASE_PORT
 
----
-
-apiVersion: v1 
-kind: Namespace
-metadata:
-  name: devops-tools
-
