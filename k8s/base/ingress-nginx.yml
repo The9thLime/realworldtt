@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-nginx
+spec:
+  rules:
+  - host: foo.bar.com
+    http:
+      paths:
+      - path: /foo
+        pathType: Prefix
+        backend:
+          service:
+            name: svc1
+            port: 
+              numnber: 80
+      - path: /bar
+        pathType: Prefix
+        backend:
+          service:
+            name: svc2
+            port:
+              number: 80
