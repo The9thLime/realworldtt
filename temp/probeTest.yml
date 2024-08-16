@@ -1,0 +1,1 @@
+gsudo mkdir /sys/fs/cgroup/memory/demo
