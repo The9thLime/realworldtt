@@ -4,12 +4,11 @@ resource "aws_db_instance" "app-database" {
   storage_type         = "gp3"
   engine               = "mysql"
   engine_version       = "8.0.35"
-  db_name              = "realworld-database"
+  db_name              = "realworld"
   identifier           = "realworld" # Ensure this is unique
   username             = "admin"
   password             = "slime123" # Consider using AWS Secrets Manager
   db_subnet_group_name = aws_db_subnet_group.database-subnet-group.name
-  snapshot_identifier  = "foo"
   skip_final_snapshot  = true
 }
 
