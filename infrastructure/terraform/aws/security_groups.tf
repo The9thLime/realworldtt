@@ -1,5 +1,5 @@
-resource "aws_security_group" "instanceSG" {
-  vpc_id = aws_vpc.main.id
+resource "aws_security_group" "instance-sg" {
+  vpc_id = aws_vpc.realworld-vpc.id
   ingress {
     from_port   = 22
     to_port     = 22
@@ -26,8 +26,8 @@ resource "aws_security_group" "instanceSG" {
   }
 }
 
-resource "aws_security_group" "dbSG" {
-  vpc_id = aws_vpc.main.id
+resource "aws_security_group" "realworld-database-sg" {
+  vpc_id = aws_vpc.realworld-vpc.id
   ingress {
     from_port   = 3306
     to_port     = 3306

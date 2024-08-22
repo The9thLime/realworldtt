@@ -9,7 +9,7 @@ locals {
   }
 }
 
-resource "aws_subnet" "vpc" {
+resource "aws_subnet" "subnets" {
   for_each          = local.az_subnet_map
   vpc_id            = aws_vpc.realworld-vpc.id
   availability_zone = each.key
@@ -29,7 +29,7 @@ resource "aws_route_table" "realworld-rt" {
 }
 
 resource "aws_route_table_association" "this" {
-  for_each       = aws_subnet.main
-  route_table_id = aws_route_table.default.id
+  for_each       = aws_subnet.subnets
+  route_table_id = aws_route_table.realworld-rt.id
   subnet_id      = each.value.id
 }
