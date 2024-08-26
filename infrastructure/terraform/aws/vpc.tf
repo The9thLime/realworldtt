@@ -14,10 +14,11 @@ locals {
 }
 
 resource "aws_subnet" "public_subnets" {
-  for_each          = local.az_public_subnet_map
-  vpc_id            = aws_vpc.realworld-vpc.id
-  availability_zone = each.key
-  cidr_block        = each.value
+  for_each                = local.az_public_subnet_map
+  vpc_id                  = aws_vpc.realworld-vpc.id
+  availability_zone       = each.key
+  cidr_block              = each.value
+  map_public_ip_on_launch = true
   tags = {
     "Name"                            = "realworld-public-subnet-${each.key}"
     "kubernetes.io/role/elb"          = "1"

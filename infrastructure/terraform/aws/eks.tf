@@ -17,8 +17,8 @@ resource "aws_eks_node_group" "eks-node-group" {
   subnet_ids      = [for subnet in aws_subnet.private_subnets : subnet.id]
 
   scaling_config {
-    desired_size = 1
-    max_size     = 1
+    desired_size = 4
+    max_size     = 4
     min_size     = 1
   }
 
