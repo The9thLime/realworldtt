@@ -13,9 +13,6 @@ resource "aws_db_instance" "app-database" {
 }
 
 resource "aws_db_subnet_group" "database-subnet-group" {
-  name = "database-subnet-group"
-  subnet_ids = [
-    aws_subnet.subnets["ap-south-1a"].id,
-    aws_subnet.subnets["ap-south-1b"].id
-  ]
+  name       = "database-subnet-group"
+  subnet_ids = [for subnet in aws_subnet.private_subnets : subnet.id]
 }
