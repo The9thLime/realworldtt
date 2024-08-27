@@ -9,19 +9,19 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    name: ''
-    namespace: {{ .Values.mysql.namespace | default "default" }}
-    server: 'https://kubernetes.default.svc'
+  project: default
   source:
-    repoURL: 'https://github.com/the9thlime/realworldtt/'
+    repoURL: {{ .Values.repoURL }}
     targetRevision: feat/helm-chart
     path: add-ons/mysql
     helm:
       values: |
         mysql:
         {{ toYaml .Values.mysql.values | nindent 10 }}
-  project: default
+  destination:
+    name: ''
+    namespace: {{ .Values.mysql.namespace | default "default" }}
+    server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:
       prune: false

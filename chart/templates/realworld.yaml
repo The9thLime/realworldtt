@@ -9,20 +9,21 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
+  project: default
+  source:
+    repoURL: {{ .Values.repoURL }}
+    targetRevision: feat/helm-chart
+    path: manifests/
   destination:
     name: ''
     namespace: {{ .Values.realworld.namespace | default "default" }}
     server: 'https://kubernetes.default.svc'
-  source:
-    path: manifests/
-    repoURL: 'https://github.com/the9thlime/realworldtt/'
-    targetRevision: feat/helm-chart
-  project: default
-  syncOptions:
-    {{- if .Values.realworld.namespace }}
-    - CreateNamespace = true
-    {{- end}}
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      {{- if .Values.realworld.namespace }}
+      - CreateNamespace = true
+      {{- end}}
+

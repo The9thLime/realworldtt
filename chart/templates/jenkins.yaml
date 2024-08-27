@@ -10,19 +10,19 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    name: ''
-    namespace: {{ .Values.jenkins.namespace | default "devops-tools" }}
-    server: 'https://kubernetes.default.svc'
-  sources:
-  - repoURL: 'https://github.com/the9thlime/realworldtt/'
+  project: default
+  source:
+    repoURL: 'https://github.com/the9thlime/realworldtt/'
     targetRevision: feat/helm-chart # Happy case
     path: add-ons/jenkins
     helm:
       value: |
         jenkins:
         {{ toYaml .Values.jenkins.values | nindent 10}}
-  project: default
+  destination:
+    name: ''
+    namespace: {{ .Values.jenkins.namespace | default "devops-tools" }}
+    server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:
       prune: true
