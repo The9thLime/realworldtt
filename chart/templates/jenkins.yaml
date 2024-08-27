@@ -18,7 +18,7 @@ spec:
     helm:
       value: |
         jenkins:
-        {{ toYaml .Values.jenkins.values | nindent 10}}
+        {{ toYaml .Values.jenkins.values | nindent 8 }}
   destination:
     name: ''
     namespace: {{ .Values.jenkins.namespace | default "devops-tools" }}

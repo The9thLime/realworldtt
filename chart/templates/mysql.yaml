@@ -17,7 +17,7 @@ spec:
     helm:
       values: |
         mysql:
-        {{ toYaml .Values.mysql.values | nindent 10 }}
+        {{ toYaml .Values.mysql.values | nindent 8 }}
   destination:
     name: ''
     namespace: {{ .Values.mysql.namespace | default "default" }}
