@@ -6,8 +6,8 @@ sources:
 - https://github.com/maorfr/kube-tasks
 - https://github.com/jenkinsci/configuration-as-code-plugin
 type: application
-version: 5.5.8
+version: 5.5.10
 dependencies:
   - name: jenkins
-    version: 13.4.19
-    repository: https://charts.bitnami.com/bitnami
+    version: 5.5.10
+    repository: https://charts.jenkins.io/
