@@ -15,7 +15,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     repoURL: 'https://github.com/the9thlime/realworldtt/'
-    targetRevision: HEAD
+    targetRevision: feat/helm-chart
     path: add-ons/mysql
     helm:
       values: |

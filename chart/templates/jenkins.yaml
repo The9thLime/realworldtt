@@ -16,7 +16,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   sources:
   - repoURL: 'https://github.com/the9thlime/realworldtt/'
-    targetRevision: HEAD
+    targetRevision: feat/helm-chart # Happy case
     path: add-ons/jenkins
     helm:
       value: |
