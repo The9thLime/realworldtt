@@ -7,3 +7,7 @@ sources:
 - https://github.com/jenkinsci/configuration-as-code-plugin
 type: application
 version: 5.5.8
+dependencies:
+  - name: jenkins
+    version: 13.4.19
+    repository: https://charts.bitnami.com/bitnami
