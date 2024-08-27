@@ -1,13 +1,18 @@
+{{- if .Values.jenkins.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: jenkins
+  annotations:
+    {{- if .Values.realworld.syncwave }}
+    argocd.argoproj.io/sync-wave: "{{ .Values.realworld.syncwave }}"
+    {{- end }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: ''
-    namespace: devops-tools
+    namespace: {{ .Values.jenkins.namespace | default "devops-tools" }}
     server: 'https://kubernetes.default.svc'
   sources:
   - repoURL: 'https://charts.jenkins.io/'
@@ -21,6 +26,10 @@ spec:
     ref: values
   project: default
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
+
+  {{- end }}

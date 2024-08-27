@@ -2,22 +2,27 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: realworld
-  annotations: 
-    argocd.argoproj.io/sync-wave: "0"
+  annotations:
+    {{- if .Values.realworld.syncwave }}
+    argocd.argoproj.io/sync-wave: "{{ .Values.realworld.syncwave }}"
+    {{- end }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: ''
-    namespace: default
+    namespace: {{ .Values.realworld.namespace | default "default" }}
     server: 'https://kubernetes.default.svc'
   source:
     path: manifests/
     repoURL: 'https://github.com/the9thlime/realworldtt/'
     targetRevision: HEAD
-  sources: []
   project: default
+  syncOptions:
+    {{- if .Values.realworld.namespace }}
+    - CreateNamespace = true
+    {{- end}}
   syncPolicy:
     automated:
-      prune: false
-      selfHeal: false
+      prune: true
+      selfHeal: true
