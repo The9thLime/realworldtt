@@ -14,18 +14,7 @@ spec:
     repoURL: {{ .Values.repoURL }}
     targetRevision: feat/helm-chart
     path: add-ons/mysql
-    helm:
-      values:
-        auth:
-          rootPassword: "123"
-          createDatabase: false
-        initdbScripts:
-          init.sql: |
-            CREATE DATABASE realworld;
-            CREATE USER 'realworld'@'%' IDENTIFIED BY '123';
-            GRANT ALL PRIVILEGES ON realworld.* TO 'realworld'@'%';
-            GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
-            FLUSH PRIVILEGES;
+    helm: {}
   destination:
     name: ''
     namespace: {{ .Values.mysql.namespace | default "default" }}
