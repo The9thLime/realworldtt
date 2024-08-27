@@ -1,3 +1,5 @@
+volumePermissions:
+  enabled: true
 auth:
   rootPassword: "123"
   createDatabase: false
