@@ -15,9 +15,17 @@ spec:
     targetRevision: feat/helm-chart
     path: add-ons/mysql
     helm:
-      values: |
-        mysql:
-        {{ toYaml .Values.mysql.values | nindent 8 }}
+      values:
+        auth:
+          rootPassword: "123"
+          createDatabase: false
+        initdbScripts:
+          init.sql: |
+            CREATE DATABASE realworld;
+            CREATE USER 'realworld'@'%' IDENTIFIED BY '123';
+            GRANT ALL PRIVILEGES ON realworld.* TO 'realworld'@'%';
+            GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+            FLUSH PRIVILEGES;
   destination:
     name: ''
     namespace: {{ .Values.mysql.namespace | default "default" }}
