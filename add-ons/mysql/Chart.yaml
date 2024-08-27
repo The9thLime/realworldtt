@@ -1,0 +1,11 @@
+apiVersion: v2
+name: mysql
+sources:
+- https://github.com/bitnami/charts/tree/main/bitnami/mysql
+version: 11.1.15
+dependencies:
+- name: common
+  repository: oci://registry-1.docker.io/bitnamicharts
+  tags:
+  - bitnami-common
+  version: 2.x.x
