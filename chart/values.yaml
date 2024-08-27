@@ -1,6 +1,13 @@
+##############################
+# Global values
+##############################
+
+repoURL: https://github.com/the9thlime/realworldtt.git
+
 ###############################
 # Realworld app
 ###############################
+
 realworld:
   syncwave:
   namespace:
@@ -8,6 +15,7 @@ realworld:
 ###############################
 # MySQL
 ###############################
+
 mysql:
   syncwave:
   namespace:
@@ -26,6 +34,7 @@ mysql:
 ###############################
 # Jenkins
 ###############################
+
 jenkins:
   enabled: true
   syncwave:
