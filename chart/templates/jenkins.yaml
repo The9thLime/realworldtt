@@ -15,15 +15,13 @@ spec:
     namespace: {{ .Values.jenkins.namespace | default "devops-tools" }}
     server: 'https://kubernetes.default.svc'
   sources:
-  - repoURL: 'https://charts.jenkins.io/'
-    targetRevision: 5.5.0
-    chart: jenkins
-    helm:
-      valueFiles:
-        - $values/values/values-jenkins.yml
-  - repoURL: 'https://github.com/the9thlime/realworldtt.git'
+  - repoURL: 'https://github.com/the9thlime/realworldtt/'
     targetRevision: HEAD
-    ref: values
+    path: add-ons/jenkins
+    helm:
+      value: |
+        jenkins:
+        {{ toYaml .Values.jenkins.values | nindent 10}}
   project: default
   syncPolicy:
     automated:
@@ -31,5 +29,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-
   {{- end }}
