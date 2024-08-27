@@ -10,9 +10,10 @@ spec:
     namespace: argocd 
     server: 'https://kubernetes.default.svc'
   source:
-    path: ./argocd-apps/base/ 
-    repoURL: 'https://github.com/the9thlime/realworldtt/'
-    targetRevision: HEAD
+    path: chart
+    repoURL: https://github.com/the9thlime/realworldtt.git
+    targetRevision: feat/helm-chart
+    helm: {}
   project: default
   syncPolicy:
     automated:
