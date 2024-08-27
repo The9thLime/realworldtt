@@ -12,7 +12,7 @@ spec:
     namespace: default
     server: 'https://kubernetes.default.svc'
   source:
-    path: ./k8s/base
+    path: manifests/
     repoURL: 'https://github.com/the9thlime/realworldtt/'
     targetRevision: HEAD
   sources: []
@@ -21,5 +21,3 @@ spec:
     automated:
       prune: false
       selfHeal: false
-    syncOptions:
-      - CreateNamespace=true
