@@ -1,0 +1,7 @@
+value:
+  installPlugins:
+    - kubernetes:4253.v7700d91739e5
+    - workflow-aggregator:600.vb_57cdd26fdd7
+    - git:5.2.2
+    - configuration-as-code:1836.vccda_4a_122a_a_e
+    - docker-workflow:580.vc0c340686b_54
