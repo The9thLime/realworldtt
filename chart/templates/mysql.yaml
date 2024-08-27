@@ -2,29 +2,31 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: mysql
-  annotations: 
-    argocd.argoproj.io/sync-wave: "-1"
+  annotations:
+    {{- if .Values.mysql.syncwave }}
+    argocd.argoproj.io/sync-wave: "{{ .Values.mysql.syncwave }}"
+    {{- end}}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: ''
-    namespace: default 
+    namespace: {{ .Values.mysql.namespace | default "default" }}
     server: 'https://kubernetes.default.svc'
-  sources:
-  - repoURL: 'https://charts.bitnami.com/bitnami'
-    targetRevision: 11.1.14
-    chart: mysql
-    helm:
-      valueFiles:
-      - $values/values/values-mysql.yml
-  - repoURL: 'https://github.com/the9thlime/realworldtt.git'
+  source:
+    repoURL: 'https://github.com/the9thlime/realworldtt/'
     targetRevision: HEAD
-    ref: values
+    path: add-ons/mysql
+    helm:
+      values: |
+        mysql:
+        {{ toYaml .Values.mysql.values | nindent 10 }}
   project: default
   syncPolicy:
     automated:
       prune: false
-      selfHeal: false
+      selfHeal: true
     syncOptions:
+      {{- if .Values.mysql.namespace }}
       - CreateNamespace=true
+      {{- end}}
