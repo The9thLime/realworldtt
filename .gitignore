@@ -8,6 +8,5 @@ venv*/*
 infrastructure/terraform/aws/.*
 infrastructure/terraform/aws/*state*
 .terraform*
-infrastructure/terraform/aws-test/.terraform
-infrastructure/terraform/aws/.terraform
-terraform.*
+infrastructure/terraform/*/.terraform
+terraform.tfstate*
