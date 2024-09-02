@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     repoURL: {{ .Values.repoURL }}
-    targetRevision: feat/helm-chart
+    targetRevision: HEAD
     path: manifests/
   destination:
     name: ''

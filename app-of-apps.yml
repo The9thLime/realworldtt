@@ -12,7 +12,7 @@ spec:
   source:
     path: chart
     repoURL: https://github.com/the9thlime/realworldtt.git
-    targetRevision: feat/helm-chart
+    targetRevision: HEAD
     helm: {}
   project: default
 #  syncPolicy:

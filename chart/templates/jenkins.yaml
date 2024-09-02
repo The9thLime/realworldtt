@@ -13,7 +13,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/the9thlime/realworldtt/'
-    targetRevision: feat/helm-chart # Happy case
+    targetRevision: HEAD
     path: add-ons/jenkins
     helm: {}
   destination:
