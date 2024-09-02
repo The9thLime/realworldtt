@@ -3,6 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: jenkins
+  namespace: {{ .Values.argocd.namespace | default "argocd"}}
   annotations:
     {{- if .Values.realworld.syncwave }}
     argocd.argoproj.io/sync-wave: "{{ .Values.realworld.syncwave }}"

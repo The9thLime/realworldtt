@@ -5,6 +5,13 @@
 repoURL: https://github.com/the9thlime/realworldtt.git
 
 ###############################
+# ArgoCD
+###############################
+
+argocd:
+  namespace:
+
+###############################
 # Realworld app
 ###############################
 
