@@ -1,12 +1,7 @@
 __pycache__
 *.pyc
-*.sqlite3
 .DS_Store
 .idea/
-django/.env
 venv*/*
-infrastructure/terraform/aws/.*
-infrastructure/terraform/aws/*state*
 .terraform*
-infrastructure/terraform/*/.terraform
 terraform.tfstate*
