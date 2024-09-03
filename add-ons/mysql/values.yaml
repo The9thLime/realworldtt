@@ -1,5 +1,3 @@
-mysqlRootPassword: "123"
-mysqlRealworldPassword: "123"
 mysql:
   primary:
     extraVolumes:

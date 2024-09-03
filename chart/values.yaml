@@ -24,6 +24,8 @@ realworld:
 ###############################
 
 mysql:
+  rootPassword: 123
+  realworldUserPassword: 123
   syncwave:
   namespace:
   values:
