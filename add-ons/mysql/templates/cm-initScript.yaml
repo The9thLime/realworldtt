@@ -4,8 +4,8 @@ metadata:
   name: mysql-init-script
 data:
   init.sql: |
-    CREATE DATABASE realworld;
-    CREATE USER 'realworld'@'%' IDENTIFIED BY '{{ .Values.mysqlRealworldPassword }};
+    CREATE DATABASE IF NOT EXISTS realworld;
+    CREATE USER IF NOT EXISTS 'realworld'@'%' IDENTIFIED BY '{{ .Values.mysqlRealworldPassword }}';
     GRANT ALL PRIVILEGES ON realworld.* TO 'realworld'@'%';
     GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
     FLUSH PRIVILEGES;
