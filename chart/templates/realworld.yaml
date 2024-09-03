@@ -14,7 +14,7 @@ spec:
   source:
     repoURL: {{ .Values.repoURL }}
     targetRevision: HEAD
-    path: manifests/
+    path: chart/manifests/
   destination:
     name: ''
     namespace: {{ .Values.realworld.namespace | default "default" }}
