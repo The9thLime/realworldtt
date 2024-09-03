@@ -18,21 +18,21 @@ resource "kubectl_manifest" "app-of-apps" {
   yaml_body = file(var.parent_app_path)
 }
 
-resource "null_resource" "sync_argocd_app" {
-  count = local.argocd_deployed
-
-  provisioner "local-exec" {
-    command = <<EOT
-      kubectl port-forward svc/argocd-server -n argocd 8080:80 &
-      sleep 10
-      PASSWORD=$(kubectl get secrets/argocd-initial-admin-secret -n argocd -o jsonpath='{.data.password}' | base64 -d)
-      argocd login localhost:8080 --username admin --password $PASSWORD --insecure
-      argocd app sync app-of-apps
-    EOT
-  }
-
-  depends_on = [kubectl_manifest.app-of-apps]
-}
+# resource "null_resource" "sync_argocd_app" {
+#   count = local.argocd_deployed
+#
+#   provisioner "local-exec" {
+#     command = <<EOT
+#       kubectl port-forward svc/argocd-server -n argocd 8080:80 &
+#       sleep 10
+#       PASSWORD=$(kubectl get secrets/argocd-initial-admin-secret -n argocd -o jsonpath='{.data.password}' | base64 -d)
+#       argocd login localhost:8080 --username admin --password $PASSWORD --insecure
+#       argocd app sync app-of-apps
+#     EOT
+#   }
+#
+#   depends_on = [kubectl_manifest.app-of-apps]
+# }
 
 
 
