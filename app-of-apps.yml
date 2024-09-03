@@ -4,16 +4,16 @@ metadata:
   name: app-of-apps
   namespace: argocd
 spec:
-  destination:
-    name: ''
-    namespace: default
-    server: 'https://kubernetes.default.svc'
+  project: default
   source:
     path: chart
     repoURL: https://github.com/the9thlime/realworldtt.git
     targetRevision: HEAD
-    helm: {}
-  project: default
+    helm: { }
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
 #  syncPolicy:
 #    automated:
 #      prune: true
