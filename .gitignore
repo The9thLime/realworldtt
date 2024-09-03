@@ -5,3 +5,5 @@ __pycache__
 venv*/*
 .terraform*
 terraform.tfstate*
+charts/
+Chart.lock
