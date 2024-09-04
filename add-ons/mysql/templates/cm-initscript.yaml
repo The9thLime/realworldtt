@@ -5,7 +5,7 @@ metadata:
 data:
   init.sql: |
     CREATE DATABASE IF NOT EXISTS realworld;
-    CREATE USER IF NOT EXISTS 'realworld'@'%' IDENTIFIED BY '{{ .Values.mysqlRealworldPassword }}';
-    GRANT ALL PRIVILEGES ON realworld.* TO 'realworld'@'%';
+    CREATE USER IF NOT EXISTS '{{ .Values.adminUsername }}'@'%' IDENTIFIED BY '{{ .Values.adminPassword }}';
+    GRANT ALL PRIVILEGES ON realworld.* TO '{{ .Values.adminUsername }}'@'%';
     GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
     FLUSH PRIVILEGES;
