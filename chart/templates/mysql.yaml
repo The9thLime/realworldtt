@@ -19,6 +19,10 @@ spec:
       values: |
         mysqlRootPassword: "{{ .Values.mysql.rootPassword }}"
         mysqlRealworldPassword: "{{ .Values.mysql.realworldUserPassword }}"
+        mysql:
+          primary:
+            containerPorts:
+              mysql: {{ .Values.mysql.containerPort | default "3306" }}
   destination:
     name: ''
     namespace: {{ .Values.mysql.namespace | default "default" }}
