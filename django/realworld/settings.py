@@ -81,11 +81,11 @@ WSGI_APPLICATION = "realworld.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": os.getenv("DATABASE_NAME","test_db"),
-        "USER": os.getenv("DATABASE_USER","root"),
-        "PASSWORD": os.getenv("DATABASE_PASSWORD","123"),
-        "HOST": os.getenv("DATABASE_HOST","127.0.0.1"),
-        "PORT": int(os.getenv("DATABASE_PORT", "3306")),
+        "NAME": os.getenv("DATABASE_NAME"),
+        "USER": os.getenv("DATABASE_USER"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD"),
+        "HOST": os.getenv("DATABASE_HOST"),
+        "PORT": os.getenv("DATABASE_PORT"),
     }
 }
 
