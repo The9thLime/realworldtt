@@ -10,15 +10,16 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
+  project: defaulßßßt
   source:
     repoURL: {{ .Values.repoURL }}
     targetRevision: HEAD
     path: add-ons/mysql
     helm:
       values: |
-        mysqlRootPassword: "{{ .Values.mysql.rootPassword }}"
-        mysqlRealworldPassword: "{{ .Values.mysql.realworldUserPassword }}"
+        rootPassword: "{{ .Values.mysql.rootPassword }}"
+        adminUsername: "{{ .Values.mysql.adminUsername}}"
+        adminPassword: "{{ .Values.mysql.adminPassword }}"
         mysql:
           primary:
             containerPorts:
