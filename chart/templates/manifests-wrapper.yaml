@@ -1,0 +1,8 @@
+{{- /* Define the list of files */ -}}
+{{- $files := list  "deployment.yaml" "secrets.yaml" "service.yaml" -}}
+
+{{- /* Iterate over each file and include its content */ -}}
+{{- range $file := $files -}}
+{{- $content := .Files.Get (printf "manifests/%s" $file) -}}
+{{- tpl $content . | nindent 2 -}}
+{{- end -}}
