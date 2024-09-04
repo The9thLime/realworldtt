@@ -9,11 +9,11 @@ repoURL: https://github.com/the9thlime/realworldtt.git
 ###############################
 
 secrets:
-  DATABASE_HOST: 3306
-  DATABASE_PORT: mysql.default.svc.cluster.local
-  DATABASE_USER: realworld
-  DATABASE_NAME: realworld
-  DATABASE_PASSWORD: 123
+  DATABASE_HOST: "3306"
+  DATABASE_PORT: "mysql.default.svc.cluster.local"
+  DATABASE_USER: "realworld"
+  DATABASE_NAME: "realworld"
+  DATABASE_PASSWORD: "123"
   SECRET_KEY:
 
 ###############################
