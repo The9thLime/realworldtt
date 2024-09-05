@@ -4,16 +4,27 @@ metadata:
   name: realworldtt-deployment
   namespace: default
   labels:
-    app: realworldtt
+    app.kubernetes.io/name: realworld
+    app.kubernetes.io/instance: realworldtt
+    app.kubernetes.io/part-of: realworldtt
+    app.kubernetes.io/version: 0.0.6
+    app.kubernetes.io/component: deployment
+    app.kubernetes.io/managed-by:
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: realworldtt
+      app.kubernetes.io/name: realworld
   template:
     metadata:
+      name: realworld
       labels:
-        app: realworldtt
+        app.kubernetes.io/name: realworld
+        app.kubernetes.io/instance: realworld
+        app.kubernetes.io/part-of: realworldtt
+        app.kubernetes.io/version: 0.0.6
+        app.kubernetes.io/component: backend
+        app.kubernetes.io/managed-by:
     spec:
       containers:
         - name: realworldtt
@@ -27,34 +38,6 @@ spec:
             requests:
               cpu: 250m
               memory: 200Mi
-          env:
-            - name: SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: django-secrets
-                  key: SECRET_KEY
-            - name: DATABASE_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: django-secrets
-                  key: DATABASE_NAME
-            - name: DATABASE_USER
-              valueFrom:
-                secretKeyRef:
-                  name: django-secrets
-                  key: DATABASE_USER
-            - name: DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: django-secrets
-                  key: DATABASE_PASSWORD
-            - name: DATABASE_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: django-secrets
-                  key: DATABASE_HOST
-            - name: DATABASE_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: django-secrets
-                  key: DATABASE_PORT
+          envFrom:
+            - secretRef:
+                name: django-secrets
