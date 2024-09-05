@@ -28,8 +28,8 @@ argocd:
 ###############################
 
 realworld:
-  syncwave:
-  namespace:
+  syncwave: 2
+  namespace: realworld
 
 ###############################
 # MySQL
@@ -41,8 +41,8 @@ mysql:
   adminPassword: 123
   host:
   containerPort: 3306
-  syncwave:
-  namespace:
+  syncwave: 1
+  namespace: mysql
   values:
 
 
@@ -53,5 +53,5 @@ mysql:
 jenkins:
   enabled: true
   syncwave:
-  namespace:
+  namespace: devops-tools
 
