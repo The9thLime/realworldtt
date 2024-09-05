@@ -17,7 +17,7 @@ spec:
     path: add-ons/mysql
     helm:
       values: |
-        rootPassword: {{ .Values.mysql.rootPassword }}
+        rootPassword: "{{ .Values.mysql.rootPassword }}"
         adminUsername: {{ .Values.mysql.adminUsername}}
         adminPassword: {{ .Values.mysql.adminPassword }}
         mysql:
