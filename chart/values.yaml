@@ -36,7 +36,6 @@ realworld:
 ###############################
 
 mysql:
-  # Pass in the secret file
   rootPassword: 123
   adminUsername: realworld
   adminPassword: 123

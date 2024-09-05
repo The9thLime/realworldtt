@@ -17,13 +17,14 @@ spec:
     path: add-ons/mysql
     helm:
       values: |
-        rootPassword: "{{ .Values.mysql.rootPassword }}"
         adminUsername: {{ .Values.mysql.adminUsername}}
         adminPassword: {{ .Values.mysql.adminPassword }}
         mysql:
           primary:
             containerPorts:
               mysql: {{ .Values.mysql.containerPort | default "3306" }}
+          auth:
+            rootPassword: {{ .Values.mysql.rootPassword }}
   destination:
     name: ''
     namespace: {{ .Values.mysql.namespace | default "default" }}
