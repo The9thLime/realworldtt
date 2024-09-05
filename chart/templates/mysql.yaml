@@ -24,7 +24,7 @@ spec:
             containerPorts:
               mysql: {{ .Values.mysql.containerPort | default "3306" }}
           auth:
-            rootPassword: {{ .Values.mysql.rootPassword }}
+            rootPassword: "{{ .Values.mysql.rootPassword }}"
   destination:
     name: ''
     namespace: {{ .Values.mysql.namespace | default "default" }}
