@@ -29,7 +29,7 @@ argocd:
 
 realworld:
   syncwave: 2
-  namespace: realworld
+  namespace: app
 
 ###############################
 # MySQL
