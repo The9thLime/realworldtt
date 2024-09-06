@@ -23,7 +23,6 @@ spec:
         app.kubernetes.io/part-of: realworldtt
         app.kubernetes.io/version: 0.0.6
         app.kubernetes.io/component: backend
-        app.kubernetes.io/managed-by:
     spec:
       containers:
         - name: realworldtt
