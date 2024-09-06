@@ -29,7 +29,7 @@ spec:
         - name: realworldtt
           image: the9thlime/realworldtt:0.0.6
           ports:
-            - containerPort: 8010
+            - containerPort: 8000
           resources:
             limits:
               cpu: 500m
