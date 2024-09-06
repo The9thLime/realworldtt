@@ -1,3 +1,4 @@
-controller:
-  installPlugins:
-    - docker-workflow:580.vc0c340686b_54
+jenkins:
+  controller:
+    installPlugins:
+      - docker-workflow:580.vc0c340686b_54
