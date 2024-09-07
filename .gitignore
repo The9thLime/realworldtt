@@ -7,3 +7,4 @@ venv*/*
 terraform.tfstate*
 charts/
 Chart.lock
+*.tfvars
