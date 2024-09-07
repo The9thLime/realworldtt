@@ -12,7 +12,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: {{ .Values.repoURL }}
+    repoURL: {{ .Values.global.repoURL }}
     targetRevision: HEAD
     path: add-ons/mysql
     helm:

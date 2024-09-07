@@ -1,13 +1,12 @@
 ##############################
 # Global values
 ##############################
-
-repoURL: https://github.com/the9thlime/realworldtt.git
+global:
+  repoURL: https://github.com/the9thlime/realworldtt.git
 
 ###############################
 # Django
 ###############################
-
 secrets:
   DATABASE_HOST: "mysql.default.svc.cluster.local"
   DATABASE_PORT: "3306"
@@ -19,30 +18,27 @@ secrets:
 ###############################
 # ArgoCD
 ###############################
-
 argocd:
   namespace:
 
 ###############################
 # Realworld app
 ###############################
-
 realworld:
   syncwave: 2
   namespace: app
 
 ###############################
-# MySQL
+# Add-ons
 ###############################
-
 mysql:
+  syncwave: 1
+  namespace:
   rootPassword: 123
   adminUsername: realworld
   adminPassword: 123
   host:
   containerPort: 3306
-  syncwave: 1
-  namespace: mysql
   values:
 
 

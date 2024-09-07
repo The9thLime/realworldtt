@@ -13,7 +13,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/the9thlime/realworldtt/'
+    repoURL: {{ .Values.global.repoURL}}
     targetRevision: HEAD
     path: add-ons/jenkins
     helm: {}
