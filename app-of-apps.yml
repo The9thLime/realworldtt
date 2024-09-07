@@ -9,7 +9,7 @@ spec:
     path: chart
     repoURL: https://github.com/the9thlime/realworldtt.git
     targetRevision: HEAD
-    helm: { }
+    helm: {}
   destination:
     name: ''
     namespace: default
