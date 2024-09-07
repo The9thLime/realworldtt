@@ -8,18 +8,18 @@ global:
 # Django
 ###############################
 secrets:
-  DATABASE_HOST: "mysql.default.svc.cluster.local"
-  DATABASE_PORT: "3306"
+  DATABASE_HOST: mysql.default.svc.cluster.local
+  DATABASE_PORT: 3306
   # DATABASE_USER is referenced in MySQL
-  DATABASE_NAME: "realworld"
+  DATABASE_NAME: realworld
   # DATABASE_PASSWORD is referenced in MySQL
-  SECRET_KEY: "k666p)gocjk82=1k(2asfc9vflw9ir-haue--@5rp7z)ex#2qc"
+  SECRET_KEY: k666p)gocjk82=1k(2asfc9vflw9ir-haue--@5rp7z)ex#2qc
 
 ###############################
 # ArgoCD
 ###############################
 argocd:
-  namespace:
+  namespace: argocd
 
 ###############################
 # Realworld app
@@ -33,21 +33,19 @@ realworld:
 ###############################
 mysql:
   syncwave: 1
-  namespace:
-  rootPassword: 123
-  adminUsername: realworld
-  adminPassword: 123
-  host:
-  containerPort: 3306
+  namespace: mysql
   values:
-
-
-###############################
-# Jenkins
-###############################
+    adminUsername: realworld
+    adminPassword: 123
+    mysql:
+      primary:
+        containerPorts:
+          mysql: 3306
+      auth:
+        createDatabase: false
+        rootPassword: ""
 
 jenkins:
-  enabled: true
+  enabled: false
   syncwave:
   namespace: devops-tools
-
