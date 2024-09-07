@@ -6,7 +6,7 @@ metadata:
   namespace: {{ .Values.argocd.namespace | default "argocd"}}
   annotations:
     {{- if .Values.realworld.syncwave }}
-    argocd.argoproj.io/sync-wave: "{{ .Values.realworld.syncwave }}"
+    argocd.argoproj.io/sync-wave: {{ .Values.realworld.syncwave | quote}}
     {{- end }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
