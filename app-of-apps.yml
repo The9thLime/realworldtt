@@ -5,14 +5,18 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    path: chart
-    repoURL: https://github.com/the9thlime/realworldtt.git
-    targetRevision: HEAD
-    helm: {}
+  sources:
+    - path: chart/add-ons
+      repoURL: https://github.com/the9thlime/realworldtt.git
+      targetRevision: HEAD
+      helm: {}
+    - path: chart/realworld
+      repoURL: https://github.com/the9thlime/realworldtt.git
+      targetRevision: HEAD
+      helm: { }
   destination:
     name: ''
-    namespace: default
+    namespace: argocd
     server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:
