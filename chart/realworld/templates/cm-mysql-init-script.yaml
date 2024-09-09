@@ -2,10 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mysql-init-script
-<<<<<<< HEAD
   namespace: {{ .Values.mysql.namespaceOverride}}
-=======
->>>>>>> 24eede954a135f9ec46abfcdb84ec964c50fd566
 data:
   init.sql: |
     CREATE DATABASE IF NOT EXISTS realworld;
