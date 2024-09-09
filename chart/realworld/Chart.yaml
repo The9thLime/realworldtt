@@ -1,6 +1,10 @@
 apiVersion: v2
 name: realworld
-description: App of Apps
+description: Realworld Django app using MySQL database
 appVersion: 1.0.0
 version: 0.1.0
 type: application
+dependencies:
+- name: mysql
+  repository: https://charts.bitnami.com/bitnami
+  version: 11.1.15

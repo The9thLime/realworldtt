@@ -1,9 +1,0 @@
-apiVersion: v2
-name: mysql
-sources:
-- https://github.com/bitnami/charts/tree/main/bitnami/mysql
-version: 11.1.15
-dependencies:
-- name: mysql
-  repository: https://charts.bitnami.com/bitnami
-  version: 11.1.15

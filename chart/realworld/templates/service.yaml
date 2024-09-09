@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service 
 metadata:
-  name: realworld-service
-  namespace: default
+  name: {{ .Release.Name}} }-service
+  namespace: {{ .Values.realworld.namespace | default "default"}}
 spec:
   selector:
-    app.kubernetes.io/name: realworld
+    app.kubernetes.io/name: {{ .Release.Name }}
   ports:
     - protocol: TCP
-      port: 8000
+      port: {{ .Values.realworld.port }}
       targetPort: 8000
-      nodePort: 30000
+      nodePort: {{ .Values.realworld.nodePort }}
   type: NodePort
