@@ -7,13 +7,7 @@ global:
 ###############################
 # Django
 ###############################
-secrets:
-  DATABASE_HOST: mysql.default.svc.cluster.local
-  DATABASE_PORT: 3306
-  # DATABASE_USER is referenced in MySQL
-  DATABASE_NAME: realworld
-  # DATABASE_PASSWORD is referenced in MySQL
-  SECRET_KEY: k666p)gocjk82=1k(2asfc9vflw9ir-haue--@5rp7z)ex#2qc
+
 
 ###############################
 # ArgoCD
@@ -24,16 +18,9 @@ argocd:
 ###############################
 # Realworld app
 ###############################
-realworld:
-  syncwave: 2
-  namespace: app
-
 ###############################
 # Add-ons
 ###############################
-mysql:
-
-
 jenkins:
   enabled: false
   syncwave:
