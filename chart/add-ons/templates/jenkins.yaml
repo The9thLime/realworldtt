@@ -5,8 +5,8 @@ metadata:
   name: jenkins
   namespace: {{ .Values.argocd.namespace | default "argocd"}}
   annotations:
-    {{- if .Values.realworld.syncwave }}
-    argocd.argoproj.io/sync-wave: {{ .Values.realworld.syncwave | quote}}
+    {{- if .Values.jenkins.syncwave }}
+    argocd.argoproj.io/sync-wave: {{ .Values.jenkins.syncwave | quote}}
     {{- end }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
