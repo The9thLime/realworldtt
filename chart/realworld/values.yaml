@@ -1,0 +1,35 @@
+realworld:
+  namespace:
+  release-name:
+  service:
+    port: 8000
+    nodePort: 30000
+  app:
+    replicas: 3
+    limits:
+      cpu: 500m
+      memory: 350Mi
+    requests:
+      cpu: 250m
+      memory: 200Mi
+
+mysql:
+  adminUsername: realworld
+  adminPassword: 123
+  mysql:
+    namespaceOverride: "mysql"
+    primary:
+      extraVolumes:
+        - name: init-script
+          configMap:
+            name: mysql-init-script
+      extraVolumeMounts:
+        - name: init-script
+          mountPath: /docker-entrypoint-initdb.d/init.sql
+          subPath: init.sql
+          readOnly: true
+      containerPorts:
+        mysql: 3306
+    auth:
+      createDatabase: false
+      rootPassword: 123

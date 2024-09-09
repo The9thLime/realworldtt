@@ -2,24 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: realworldtt-deployment
-  namespace: app
+  namespace: {{ .Values.realworld.namespace}}
   labels:
-    app.kubernetes.io/name: realworld
+    app.kubernetes.io/name: {{ .Release.Name }}
     app.kubernetes.io/instance: realworldtt
     app.kubernetes.io/part-of: realworldtt
     app.kubernetes.io/version: 0.0.6
     app.kubernetes.io/component: deployment
 spec:
-  replicas: 3
+  replicas: {{ .Values.realworld.app.replicas }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: realworld
+      app.kubernetes.io/name: {{ .Release.Name }}
   template:
     metadata:
-      name: realworld
+      name: {{ .Release.Name }}
       labels:
-        app.kubernetes.io/name: realworld
-        app.kubernetes.io/instance: realworld
+        app.kubernetes.io/name: {{ .Release.Name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/part-of: realworldtt
         app.kubernetes.io/version: 0.0.6
         app.kubernetes.io/component: backend
@@ -30,12 +30,16 @@ spec:
           ports:
             - containerPort: 8000
           resources:
+            {{ with .Values.realworld.app}}
             limits:
-              cpu: 500m
-              memory: 350Mi
+              {{- range $key, $value := .limits }}
+              {{ $key }}: {{ $value}}
+              {{- end}}
             requests:
-              cpu: 250m
-              memory: 200Mi
+              {{- range $key, $value := .requests }}
+              {{ $key }}: {{ $value}}
+              {{- end}}
+            {{- end }}
           envFrom:
             - secretRef:
                 name: django-secrets
