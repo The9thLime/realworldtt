@@ -1,6 +1,7 @@
 realworld:
   namespace:
   release-name:
+<<<<<<< HEAD
   secrets:
     DATABASE_HOST: mysql.default.svc.cluster.local
     DATABASE_PORT: 3306
@@ -8,6 +9,8 @@ realworld:
     DATABASE_NAME: realworld
     # DATABASE_PASSWORD is referenced in .mysql
     SECRET_KEY: k666p)gocjk82=1k(2asfc9vflw9ir-haue--@5rp7z)ex#2qc
+=======
+>>>>>>> 24eede954a135f9ec46abfcdb84ec964c50fd566
   service:
     port: 8000
     nodePort: 30000
@@ -21,6 +24,7 @@ realworld:
       memory: 200Mi
 
 mysql:
+<<<<<<< HEAD
   # Values for the init-scirpt
   adminUsername: realworld
   adminPassword: 123
@@ -41,3 +45,24 @@ mysql:
   auth:
     createDatabase: false
     rootPassword: "123"
+=======
+  adminUsername: realworld
+  adminPassword: 123
+  mysql:
+    namespaceOverride: "mysql"
+    primary:
+      extraVolumes:
+        - name: init-script
+          configMap:
+            name: mysql-init-script
+      extraVolumeMounts:
+        - name: init-script
+          mountPath: /docker-entrypoint-initdb.d/init.sql
+          subPath: init.sql
+          readOnly: true
+      containerPorts:
+        mysql: 3306
+    auth:
+      createDatabase: false
+      rootPassword: 123
+>>>>>>> 24eede954a135f9ec46abfcdb84ec964c50fd566

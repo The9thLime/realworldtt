@@ -1,16 +1,27 @@
 apiVersion: v1
 kind: Service 
 metadata:
+<<<<<<< HEAD
   name: {{ .Release.Name}}-service
+=======
+  name: {{ .Release.Name}} }-service
+>>>>>>> 24eede954a135f9ec46abfcdb84ec964c50fd566
   namespace: {{ .Values.realworld.namespace | default "default"}}
 spec:
   selector:
     app.kubernetes.io/name: {{ .Release.Name }}
   ports:
+<<<<<<< HEAD
     {{- with .Values.realworld.service}}
     - protocol: TCP
       port: {{ .port | default "8000"}}
       targetPort: 8000
       nodePort: {{ .nodePort | default "32000" }}
     {{- end}}
+=======
+    - protocol: TCP
+      port: {{ .Values.realworld.port }}
+      targetPort: 8000
+      nodePort: {{ .Values.realworld.nodePort }}
+>>>>>>> 24eede954a135f9ec46abfcdb84ec964c50fd566
   type: NodePort
