@@ -32,18 +32,7 @@ realworld:
 # Add-ons
 ###############################
 mysql:
-  syncwave: 1
-  namespace: mysql
-  values:
-    adminUsername: realworld
-    adminPassword: 123
-    mysql:
-      primary:
-        containerPorts:
-          mysql: 3306
-      auth:
-        createDatabase: false
-        rootPassword: ""
+
 
 jenkins:
   enabled: false
