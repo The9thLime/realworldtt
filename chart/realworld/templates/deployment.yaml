@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.mysql.namespaceOverride}}
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.realworld.namespace}}
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -44,14 +56,3 @@ spec:
             - secretRef:
                 name: django-secrets
 
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: {{ .Values.mysql.namespaceOverride}}
-
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: {{ .Values.realworld.namespace}}
