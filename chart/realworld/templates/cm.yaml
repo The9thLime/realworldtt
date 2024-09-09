@@ -22,3 +22,18 @@ data:
           end
         end
         return hs
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-script
+  namespace: {{ .Values.mysql.namespaceOverride}}
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS realworld;
+    CREATE USER IF NOT EXISTS '{{ .Values.mysql.adminUsername }}'@'%' IDENTIFIED BY '{{ .Values.mysql.adminPassword }}';
+    GRANT ALL PRIVILEGES ON realworld.* TO '{{ .Values.mysql.adminUsername }}'@'%';
+    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+    FLUSH PRIVILEGES;
+
