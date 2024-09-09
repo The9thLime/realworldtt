@@ -43,9 +43,15 @@ spec:
           envFrom:
             - secretRef:
                 name: django-secrets
----
 
+---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: {{ .Values.mysql.namespaceOverride}}
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.realworld.namespace}}
