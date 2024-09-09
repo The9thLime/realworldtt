@@ -1,8 +1,7 @@
 realworld:
-  namespace:
-  release-name:
+  namespace: app
+  release-name: realworld
   secrets:
-    DATABASE_HOST: mysql.default.svc.cluster.local
     DATABASE_PORT: 3306
     # DATABASE_USER is referenced in .mysql
     DATABASE_NAME: realworld
@@ -21,7 +20,7 @@ realworld:
       memory: 200Mi
 
 mysql:
-  # Values for the init-scirpt
+  # Values for the init-script
   adminUsername: realworld
   adminPassword: 123
   # Values for the base bitnami/mysql chart
