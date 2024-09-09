@@ -1,0 +1,6 @@
+apiVersion: v2
+name: add-ons
+description: Helm chart to deploy add-ons as ArgoCD apps
+appVersion: 1.0.0
+version: 0.1.0
+type: application

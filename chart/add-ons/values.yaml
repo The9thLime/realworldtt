@@ -1,0 +1,27 @@
+##############################
+# Global values
+##############################
+global:
+  repoURL: https://github.com/the9thlime/realworldtt.git
+
+###############################
+# Django
+###############################
+
+
+###############################
+# ArgoCD
+###############################
+argocd:
+  namespace: argocd
+
+###############################
+# Realworld app
+###############################
+###############################
+# Add-ons
+###############################
+jenkins:
+  enabled: false
+  syncwave:
+  namespace: devops-tools

@@ -1,0 +1,43 @@
+realworld:
+  namespace:
+  release-name:
+  secrets:
+    DATABASE_HOST: mysql.default.svc.cluster.local
+    DATABASE_PORT: 3306
+    # DATABASE_USER is referenced in .mysql
+    DATABASE_NAME: realworld
+    # DATABASE_PASSWORD is referenced in .mysql
+    SECRET_KEY: k666p)gocjk82=1k(2asfc9vflw9ir-haue--@5rp7z)ex#2qc
+  service:
+    port: 8000
+    nodePort: 30000
+  app:
+    replicas: 3
+    limits:
+      cpu: 500m
+      memory: 350Mi
+    requests:
+      cpu: 250m
+      memory: 200Mi
+
+mysql:
+  # Values for the init-scirpt
+  adminUsername: realworld
+  adminPassword: 123
+  # Values for the base bitnami/mysql chart
+  namespaceOverride: "mysql"
+  primary:
+    extraVolumes:
+      - name: init-script
+        configMap:
+          name: mysql-init-script
+    extraVolumeMounts:
+      - name: init-script
+        mountPath: /docker-entrypoint-initdb.d/init.sql
+        subPath: init.sql
+        readOnly: true
+    containerPorts:
+      mysql: 3306
+  auth:
+    createDatabase: false
+    rootPassword: "123"
