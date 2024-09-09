@@ -2,7 +2,7 @@
 # Global values
 ##############################
 global:
-  argoccd_namespace: argocd
+  argocd_namespace: argocd
   repoURL: https://github.com/the9thlime/realworldtt.git
 
 ###############################
