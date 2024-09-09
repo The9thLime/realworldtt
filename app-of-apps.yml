@@ -13,8 +13,7 @@ spec:
     - path: chart/realworld
       repoURL: https://github.com/the9thlime/realworldtt.git
       targetRevision: HEAD
-      helm:
-        releaseName: realworld
+      helm: {}
   destination:
     name: ''
     namespace: argocd
