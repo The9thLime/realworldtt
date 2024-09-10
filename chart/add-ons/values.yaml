@@ -9,11 +9,11 @@ global:
 # Add-ons
 ###############################
 jenkins:
-  enabled: true
+  enabled: false
   syncwave: 1
   namespace: devops-tools
 
 kubePrometheusStack:
-  enabled: false
+  enabled: true
   syncwave: 2
   namespace: monitoring
