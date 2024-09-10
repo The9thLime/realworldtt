@@ -16,9 +16,7 @@ spec:
     repoURL: {{ .Values.global.repoURL}}
     targetRevision: HEAD
     path: add-ons/jenkins
-    helm: {}
   destination:
-    name: ''
     namespace: {{ .Values.jenkins.namespace | default "devops-tools" }}
     server: 'https://kubernetes.default.svc'
   syncPolicy:
