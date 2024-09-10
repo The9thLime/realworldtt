@@ -22,6 +22,7 @@ spec:
     namespace: {{ .Values.jenkins.namespace | default "devops-tools" }}
     server: 'https://kubernetes.default.svc'
   syncPolicy:
+    automated: {}
     syncOptions:
       - CreateNamespace=true
   {{- end }}
