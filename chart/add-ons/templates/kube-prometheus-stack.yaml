@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Release.Name}}
+  name: kube-prometheus-stack
   namespace: {{ .Values.global.argocd_namespace | default "argocd"}}
   annotations:
     {{- if .Values.kubePrometheusStack.syncwave }}
@@ -16,8 +16,7 @@ spec:
     repoURL: {{ .Values.global.repoURL}}
     targetRevision: HEAD
     path: add-ons/kube-prometheus-stack
-    helm:
-      releaseName: kube-prometheus-stack
+    helm: {}
   destination:
     name: ''
     namespace: {{ .Values.kubePrometheusStack.namespace | default "monitoring" }}
