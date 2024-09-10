@@ -13,7 +13,7 @@ locals {
   argocd_deployed = helm_release.argocd.status == "deployed" ? 1 : 0
 }
 
-resource "kubectl_manifest" "app-of-apps" {
+resource "kubectl_manifest" "application-set" {
   count     = local.argocd_deployed
   yaml_body = file(var.parent_app_path)
 }
