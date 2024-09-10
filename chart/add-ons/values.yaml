@@ -9,7 +9,7 @@ global:
 # Add-ons
 ###############################
 jenkins:
-  enabled: true
+  enabled: false
   syncwave:
   namespace: devops-tools
 
