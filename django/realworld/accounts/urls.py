@@ -11,5 +11,4 @@ urlpatterns = [
     path("check-email/", views.check_email, name="check_email"),
     path("profile/<int:user_id>/", views.profile, name="profile"),
     path("profile/follow/<int:user_id>/", views.follow, name="follow"),
-    path("", include('django_prometheus.urls'))
 ]
