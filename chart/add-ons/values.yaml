@@ -14,6 +14,6 @@ jenkins:
   namespace: devops-tools
 
 kubePrometheusStack:
-  enabled: false
+  enabled: enable
   syncwave:
   namespace: monitoring
