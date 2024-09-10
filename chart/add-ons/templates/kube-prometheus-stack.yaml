@@ -16,7 +16,8 @@ spec:
     repoURL: {{ .Values.global.repoURL}}
     targetRevision: HEAD
     path: add-ons/kube-prometheus-stack
-    helm: {}
+    helm:
+      releaseName: kube-prometheus-stack
   destination:
     name: ''
     namespace: {{ .Values.kubePrometheusStack.namespace | default "monitoring" }}
