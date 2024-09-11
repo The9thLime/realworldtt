@@ -8,8 +8,8 @@ metadata:
     {{- if .Values.kubePrometheusStack.syncwave }}
     argocd.argoproj.io/sync-wave: {{ .Values.kubePrometheusStack.syncwave | quote}}
     {{- end }}
-{{/*  finalizers:*/}}
-{{/*  - resources-finalizer.argocd.argoproj.io*/}}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
@@ -20,7 +20,10 @@ spec:
     namespace: {{ .Values.kubePrometheusStack.namespace | default "monitoring" }}
     server: 'https://kubernetes.default.svc'
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
 {{- end }}
