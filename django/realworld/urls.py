@@ -4,7 +4,7 @@ from django.urls import include, path
 urlpatterns = [
     path("", include("realworld.articles.urls")),
     path("", include("realworld.accounts.urls")),
-    path('', include('django_prometheus.urls')),
+    path("", include("django_prometheus.urls")),
     path("comments/", include("realworld.comments.urls")),
     path("admin/", admin.site.urls),
 ]
