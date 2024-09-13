@@ -1,0 +1,20 @@
+apiVersion: v2
+name: minio
+description: Object store with S3-compatible API and features
+
+# Application charts are a collection of templates that can be packaged into versioned archives
+# to be deployed.
+type: application
+
+# The chart version. This version number should be incremented each time you make changes
+# to the chart and its templates, including the app version.
+version: 6.0.3
+
+# Version number of the application being deployed. This version number should be
+# incremented each time you make changes to the application.
+appVersion: RELEASE.2024-04-18T19-09-19Z
+
+dependencies:
+  - name: minio
+    version: 5.2.0
+    repository: https://charts.min.io

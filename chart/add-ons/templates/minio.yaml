@@ -1,0 +1,32 @@
+{{- if .Values.minio.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio
+  namespace: {{ .Values.global.argocd_namespace | default "argocd"}}
+  annotations:
+    {{- if .Values.minio.syncwave }}
+    argocd.argoproj.io/sync-wave: {{ .Values.minio.syncwave | quote}}
+    {{- end }}
+{{/*  finalizers:*/}}
+{{/*  - resources-finalizer.argocd.argoproj.io*/}}
+spec:
+  project: default
+  source:
+    repoURL: {{ .Values.global.repoURL}}
+    targetRevision: HEAD
+    path: add-ons/minio
+    helm:
+      values:
+        minio:
+          buckets:
+            {{- range $buckets := .Values.minio.buckets}}
+
+  destination:
+    namespace: {{ .Values.minio.namespace | default "minio" }}
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}
