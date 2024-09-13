@@ -1,8 +1,0 @@
-minio:
-  mode: standalone
-  replicas: 2
-  resources:
-    requests:
-      memory: 4Gi
-  persistence:
-    size: 20Gi
