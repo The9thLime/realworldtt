@@ -25,11 +25,20 @@ minio:
   namespace: minio
   persistence:
     enabled: true
-    existing
   resources:
     requests:
       memory:
-  buckets: []
+  buckets:
+    - name: sql-backup
+      policy: none
+      purge: false
+      versioning: true
+      objectlocking: false
+    - name: sql-backup-2
+      policy: none
+      purge: false
+      versioning: true
+      objectlocking: false
     #   # Name of the bucket
     # - name: bucket1
     #   # Policy to be set on the
