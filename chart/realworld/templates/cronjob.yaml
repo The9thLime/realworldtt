@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: database-backup-cj
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: dump
+              image: mysql:latest
+              command:
+                - "/bin/sh"
+                - "-c"
+                - "ping realworld-mysql.mysql.svc.cluster.local "
+          volumes:
+            - name: backup-volume
+              persistentVolumeClaim:
+                claimName: mysql-backup-volume
+            - name: credentials
+              secret:
+                secretName: django-secrets
+
+
+
