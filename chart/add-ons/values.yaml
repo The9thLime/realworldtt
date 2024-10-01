@@ -9,25 +9,22 @@ global:
 # Add-ons
 ###############################
 jenkins:
-  enabled: true
+  enabled: false
   syncwave:
   namespace: devops-tools
-
-kubePrometheusStack:
-  enabled: true
-  syncwave:
-  namespace: monitoring
 
 minio:
   enabled: true
   nameOverride:
   syncwave:
   namespace: minio
+  rootUser: lime
+  rootPassword: lime@123
   persistence:
     enabled: true
   resources:
     requests:
-      memory:
+      memory: 1Gi
   buckets:
     - name: sql-backup
       policy: none
@@ -52,8 +49,11 @@ minio:
     #   # set objectlocking for
     #   # bucket [true|false] NOTE: versioning is enabled by default if you use locking
     #   objectlocking: false
-  users:
-    - accessKey:
-      existingSecret:
-      existingSecretKey:
+  # Number of drives attached to a node
+  drivesPerNode: 1
+  # Number of MinIO containers running
+  replicas: 2
+  # Number of expanded MinIO clusters
+  pools: 1
+
   policies:
