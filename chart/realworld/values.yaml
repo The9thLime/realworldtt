@@ -39,3 +39,5 @@ mysql:
   auth:
     createDatabase: false
     rootPassword: "123"
+  backup:
+    enabled: false
