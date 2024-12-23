@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     repoURL: {{ .Values.global.repoURL}}
-    targetRevision: HEAD
+    targetRevision: main
     path: add-ons/kube-prometheus-stack
   destination:
     namespace: {{ .Values.kube_prometheus_stack.namespace }}

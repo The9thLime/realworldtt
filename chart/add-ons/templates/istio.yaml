@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     repoURL: {{ .Values.global.repoURL}}
-    targetRevision: HEAD
+    targetRevision: main
     path: add-ons/istio
   destination:
     namespace: {{ .Values.istio.namespace }}
