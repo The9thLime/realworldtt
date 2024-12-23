@@ -16,6 +16,8 @@ spec:
     repoURL: {{ .Values.global.repoURL}}
     targetRevision: main
     path: add-ons/jenkins
+    helm:
+      releaseName: jenkins
   destination:
     namespace: {{ .Values.jenkins.namespace }}
     server: 'https://kubernetes.default.svc'

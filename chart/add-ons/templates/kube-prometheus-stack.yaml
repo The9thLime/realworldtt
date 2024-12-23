@@ -16,6 +16,8 @@ spec:
     repoURL: {{ .Values.global.repoURL}}
     targetRevision: main
     path: add-ons/kube-prometheus-stack
+    helm:
+      releaseName: kube-prometheus-stack
   destination:
     namespace: {{ .Values.kube_prometheus_stack.namespace }}
     server: 'https://kubernetes.default.svc'
