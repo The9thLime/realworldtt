@@ -1,12 +1,12 @@
-{{- if .Values.kubePrometheusStack.enabled }}
+{{- if .Values.kube_prometheus_stack.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kube-prometheus-stack
+  name: addons-kube-prometheus-stack
   namespace: {{ .Values.global.argocd_namespace | default "argocd"}}
   annotations:
-    {{- if .Values.kubePrometheusStack.syncwave }}
-    argocd.argoproj.io/sync-wave: {{ .Values.kubePrometheusStack.syncwave | quote}}
+    {{- if .Values.kube_prometheus_stack.syncwave }}
+    argocd.argoproj.io/sync-wave: {{ .Values.kube_prometheus_stack.syncwave | quote}}
     {{- end }}
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -17,7 +17,7 @@ spec:
     targetRevision: HEAD
     path: add-ons/kube-prometheus-stack
   destination:
-    namespace: {{ .Values.kubePrometheusStack.namespace | default "monitoring" }}
+    namespace: {{ .Values.kube_prometheus_stack.namespace }}
     server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:
