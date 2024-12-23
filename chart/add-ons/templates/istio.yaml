@@ -18,6 +18,8 @@ spec:
     path: add-ons/istio
     helm:
       releaseName: istio
+      valueFiles:
+        - values.yaml
   destination:
     namespace: {{ .Values.istio.namespace }}
     server: 'https://kubernetes.default.svc'

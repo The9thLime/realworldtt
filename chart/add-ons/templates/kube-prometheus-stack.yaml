@@ -18,6 +18,8 @@ spec:
     path: add-ons/kube-prometheus-stack
     helm:
       releaseName: kube-prometheus-stack
+      valueFiles:
+        - values.yaml
   destination:
     namespace: {{ .Values.kube_prometheus_stack.namespace }}
     server: 'https://kubernetes.default.svc'

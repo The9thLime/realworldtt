@@ -18,6 +18,8 @@ spec:
     path: add-ons/jenkins
     helm:
       releaseName: jenkins
+      valueFiles:
+        - values.yaml
   destination:
     namespace: {{ .Values.jenkins.namespace }}
     server: 'https://kubernetes.default.svc'
