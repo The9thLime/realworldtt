@@ -2,8 +2,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: addons-jenkins
-  namespace: {{ .Values.global.argocd_namespace | default "argocd"}}
+  name: addons-istio
+  namespace: {{ .Values.global.argocd_namespace }}
   annotations:
     {{- if .Values.istio.syncwave }}
     argocd.argoproj.io/sync-wave: {{ .Values.istio.syncwave | quote}}
