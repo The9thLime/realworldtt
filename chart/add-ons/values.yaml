@@ -4,16 +4,18 @@
 global:
   argocd_namespace: argocd
   repoURL: https://github.com/the9thlime/realworldtt.git
-
 ###############################
 # Add-ons
 ###############################
+istio:
+  enabled: true
+  syncwave: 1
+  namespace: istio-system
 jenkins:
   enabled: true
   syncwave: 1
-  namespace: devops-tools
-
-kubePrometheusStack:
+  namespace: jenkins
+kube_prometheus_stack:
   enabled: true
   syncwave: 2
   namespace: monitoring
