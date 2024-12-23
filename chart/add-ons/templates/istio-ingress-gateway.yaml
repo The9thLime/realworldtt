@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: addons-istio
+  name: addons-istio-gateway
   namespace: {{ .Values.global.argocd_namespace }}
   annotations:
     {{- if .Values.istio_gateway.syncwave }}
