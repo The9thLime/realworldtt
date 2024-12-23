@@ -11,6 +11,10 @@ istio:
   enabled: true
   syncwave: 1
   namespace: istio-system
+istio_gateway:
+  enabled: true
+  syncwave: 1
+  namespace: istio-system
 jenkins:
   enabled: true
   syncwave: 1

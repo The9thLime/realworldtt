@@ -1,6 +1,6 @@
 apiVersion: v2
-name: istio
-description: A Helm chart for Istio
+name: istio-gateway
+description: A Helm chart for Istio gateway
 
 # Application charts are a collection of templates that can be packaged into versioned archives
 # to be deployed.
@@ -15,9 +15,6 @@ version: 0.1.0
 appVersion: "1.0"
 
 dependencies:
-  - name: base
-    version: 1.24.2
-    repository: https://istio-release.storage.googleapis.com/charts
-  - name: istiod
+  - name: gateway
     version: 1.24.2
     repository: https://istio-release.storage.googleapis.com/charts

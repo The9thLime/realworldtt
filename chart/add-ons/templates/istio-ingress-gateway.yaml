@@ -1,0 +1,31 @@
+{{- if .Values.istio_gateway.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: addons-istio
+  namespace: {{ .Values.global.argocd_namespace }}
+  annotations:
+    {{- if .Values.istio_gateway.syncwave }}
+    argocd.argoproj.io/sync-wave: {{ .Values.istio_gateway.syncwave | quote}}
+    {{- end }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: {{ .Values.global.repoURL}}
+    targetRevision: main
+    path: add-ons/istio-gateway
+    helm:
+      releaseName: istio-ingress-gateway
+      valueFiles:
+        - values.yaml
+  destination:
+    namespace: {{ .Values.istio_gateway.namespace }}
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  {{- end }}
