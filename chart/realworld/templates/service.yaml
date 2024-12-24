@@ -9,8 +9,7 @@ spec:
   ports:
     {{- with .Values.realworld.service}}
     - protocol: TCP
-      port: {{ .port | default "8000"}}
+      port: {{ .port }}
       targetPort: 8000
-      nodePort: {{ .nodePort | default "32000" }}
     {{- end}}
-  type: NodePort
+  type: ClusterIP

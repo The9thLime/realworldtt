@@ -7,8 +7,7 @@ realworld:
     # DATABASE_PASSWORD is referenced in .mysql
     SECRET_KEY: k666p)gocjk82=1k(2asfc9vflw9ir-haue--@5rp7z)ex#2qc
   service:
-    port: 8000
-    nodePort: 30000
+    port: 80
   app:
     replicas: 3
     limits:
