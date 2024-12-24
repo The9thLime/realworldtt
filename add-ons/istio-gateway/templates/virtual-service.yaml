@@ -1,0 +1,139 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: realworldtt
+  namespace: app
+spec:
+  hosts:
+    - "realworld.lime.local"
+  gateways:
+    - istio-system/minikube-gateway
+  http:
+    - match:
+      - uri:
+          prefix: /
+      route:
+        - destination:
+            host: realworld-service.app.svc.cluster.local
+            port:
+              number: 80
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  hosts:
+    - "grafana.lime.local"
+  gateways:
+    - istio-system/minikube-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: kube-prometheus-stack-grafana.monitoring.svc.cluster.local
+            port:
+              number: 3000
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  hosts:
+    - "prometheus.lime.local"
+  gateways:
+    - istio-system/minikube-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: kube-prometheus-stack-prometheus.monitoring.svc.cluster.local
+            port:
+              number: 9090
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: mysql
+  namespace: mysql
+spec:
+  hosts:
+    - "db.lime.local"
+  gateways:
+    - istio-system/minikube-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: realworld-mysql.mysql.svc.cluster.local
+            port:
+              number: 3306
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: jenkins
+  namespace: jenkins
+spec:
+  hosts:
+    - "jenkins.lime.local"
+  gateways:
+    - istio-system/minikube-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: jenkins.jenkins.svc.cluster.local
+            port:
+              number: 8080
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: kubernetes-dashboard
+  namespace: monitoring
+spec:
+  hosts:
+    - "dashboard.lime.local"
+  gateways:
+    - istio-system/minikube-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: kubernetes-dashboard.kubernetes-dashboard.svc.cluster.local
+            port:
+              number: 80
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: argo-cd-server
+  namespace: argocd
+spec:
+  hosts:
+    - "argocd.lime.local"
+  gateways:
+    - istio-system/minikube-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: argocd-server.argocd.svc.cluster.local
+            port:
+              number: 80
