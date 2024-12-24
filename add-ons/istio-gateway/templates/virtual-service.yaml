@@ -36,7 +36,7 @@ spec:
         - destination:
             host: kube-prometheus-stack-grafana.monitoring.svc.cluster.local
             port:
-              number: 3000
+              number: 80
 ---
 apiVersion: networking.istio.io/v1
 kind: VirtualService
